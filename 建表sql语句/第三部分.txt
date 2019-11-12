@@ -1,0 +1,30 @@
+CREATE TABLE Material
+( m_id int constraint m_id primary key auto INCREMENT,
+  stu_id int constraint stu_id foreign key references Student(stu_id),
+  m_text text not null
+)
+
+CREATE TABLE Selection
+( sec_id int constraint sec_id primary key auto INCREMENT,
+  stu_id int constraint stu_id foreign key references Student(stu_id),
+  priority int not null,
+  pl_id int constraint pl_id foreign key references Problem(pl_id),
+  m_id int constraint m_id foreign key references Material(m_id)
+  
+)
+
+CREATE TABLE Student
+( stu_id int constraint stu_id primary key auto INCREMENT,
+  u_id int constraint u_id foreign key references Teacher(u_id),
+  SN nvarchar not null,
+  mjr_id int constraint mjr_id foreign key references ProblemProfession(mjr_id)  
+)
+
+CREATE TABLE Selectedtopic
+( 
+  stu_id int constraint stu_id foreign key references Student(stu_id),
+  pl_id int constraint pl_id foreign key references Problem(pl_id),
+  CONSTRAINT ST_key PRIMARY KEY(stu_id, pl_id) auto INCREMENT
+)
+
+
