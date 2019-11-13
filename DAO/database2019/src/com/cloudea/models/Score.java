@@ -2,7 +2,7 @@ package com.cloudea.models;
 
 public class Score {
 
-	
+
 	private int rep_id;
 	private int tch_id;
 	private int score;

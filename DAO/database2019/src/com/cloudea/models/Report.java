@@ -1,6 +1,7 @@
 package com.cloudea.models;
 
 public class Report {
+
 	private int rep_id;
 	private int stu_id;
 	private int pl_id;

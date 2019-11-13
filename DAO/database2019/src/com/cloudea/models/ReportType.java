@@ -1,6 +1,7 @@
 package com.cloudea.models;
 
 public class ReportType {
+
 	private int rept_id;
 	private String report_type;
 	public ReportType() {
@@ -23,5 +24,4 @@ public class ReportType {
 	public void setReport_type(String report_type) {
 		this.report_type = report_type;
 	}
-	
 }

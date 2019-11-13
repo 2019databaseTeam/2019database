@@ -10,4 +10,5 @@ public interface PermDAO extends DAO {
 	void update(Perm perm) throws Exception;
 	Perm select(int id) throws Exception;
 	List<Perm> selectAll() throws Exception;
+
 }
