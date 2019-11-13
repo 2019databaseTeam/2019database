@@ -3,6 +3,16 @@ package com.cloudea.models;
 public class Perm {
 	private int pmt_id;
 	private String per_context;
+	
+	
+	public Perm() {
+		super();
+	}
+	public Perm(int pmt_id, String per_context) {
+		super();
+		this.pmt_id = pmt_id;
+		this.per_context = per_context;
+	}
 	public int getPmt_id() {
 		return pmt_id;
 	}

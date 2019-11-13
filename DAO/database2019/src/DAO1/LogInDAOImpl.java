@@ -1,5 +1,4 @@
 package DAO1;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 	public static LogInDAOImpl getInstance() {return LogInDAOImpl.instance;};
 	
 	private LogInDAOImpl() {}
-	private static final String insertSql="insert into Log_in values(?,?,?,?)";
+	private static final String insertSql="insert into Log_in values(?,?,?)";
 	private static final String deleteSql="delete from Log_in where log_id = ?";
-	private static final String updateSql="update Log_in set log_id=?,u_id=?,in_time=?,out_time=?";
+	private static final String updateSql="update Log_in set log_id=?,u_id=?,in_time=?";
 	private static final String selectSql="select * from Log_in where 'log_id'=?";
 	
 	
@@ -28,7 +27,6 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 		statement.setInt(1, login.getLog_id());
 		statement.setInt(2, login.getU_id());
 		statement.setString(3,login.getIn_time());
-		statement.setString(4,login.getOut_time());
 		statement.execute();
 	}
 
@@ -45,7 +43,6 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 		statement.setInt(1,login.getLog_id() );
 		statement.setInt(2, login.getU_id());
 		statement.setString(3,login.getIn_time() );
-		statement.setString(4,login.getOut_time() );
 		statement.execute();
 	}
 
@@ -59,7 +56,6 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 			login.setLog_id(result.getInt("log_id"));
 			login.setU_id(result.getInt("u_id"));
 			login.setIn_time(result.getString("in_time"));
-			login.setOut_time(result.getString("out_time"));
 			return login;
 		}
 		return null;
@@ -77,7 +73,6 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 			login.setLog_id(result.getInt("log_id"));
 			login.setU_id(result.getInt("u_id"));
 			login.setIn_time(result.getString("in_time"));
-			login.setOut_time(result.getString("out_time"));
 			return login;
 		}
 		return null;
@@ -91,7 +86,7 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 		ResultSet result=statement.executeQuery();
 		while(result.next())
 		{
-			LogIn t = new LogIn(result.getInt(1),result.getInt(2),result.getString(3),result.getString(4));
+			LogIn t = new LogIn(result.getInt(1),result.getInt(2),result.getString(3));
 			logins.add(t);
 		}
 		return logins;
@@ -105,7 +100,7 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 		ResultSet result=statement.executeQuery();
 		while(result.next())
 		{
-			LogIn t = new LogIn(result.getInt(1),result.getInt(2),result.getString(3),result.getString(4));
+			LogIn t = new LogIn(result.getInt(1),result.getInt(2),result.getString(3));
 			logins.add(t);
 		}
 		return logins;

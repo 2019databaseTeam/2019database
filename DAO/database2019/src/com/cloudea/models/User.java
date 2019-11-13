@@ -7,6 +7,17 @@ public class User {
 	 private String adm;
 	 private String pawd;
 	 
+	public User() {
+		super();
+	}
+	public User(int u_id, String u_type, String u_mailbox, String adm, String pawd) {
+		super();
+		this.u_id = u_id;
+		this.u_type = u_type;
+		this.u_mailbox = u_mailbox;
+		this.adm = adm;
+		this.pawd = pawd;
+	}
 	public int getU_id() {
 		return u_id;
 	}
