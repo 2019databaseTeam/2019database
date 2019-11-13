@@ -1,0 +1,9 @@
+
+code/.metadata/.lock
+code/.metadata/.plugins/com.genuitec.org.hibernate.eclipse/hibernate-tools.log
+code/.metadata/.plugins/com.genuitec.pulse.client.delivery.package.runtime/logs/package-runtime-0.log
+code/.metadata/.plugins/org.eclipse.jdt.core/index.db
+code/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log
+DAO/database2019/.project
+DAO/database2019/bin/.project
+DAO/database2019/bin/src/dao2/MajorDAOImpl.class
