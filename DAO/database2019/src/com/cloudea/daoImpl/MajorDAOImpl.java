@@ -1,4 +1,4 @@
-package dao2;
+package com.cloudea.daoImpl;
 
 import java.util.ArrayList;
 import java.util.List;
