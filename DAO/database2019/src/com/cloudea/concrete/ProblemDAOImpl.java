@@ -1,4 +1,4 @@
-package dao2;
+package com.cloudea.concrete;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
@@ -77,27 +77,6 @@ public class ProblemDAOImpl extends SqlServerConnector implements ProblemDAO{
 		return null;
 	} 
 	
-	@Override
-	public Problem select(String key,int value) throws Exception{
-		String sql="select * from problem where "+key+"='"+value+"'";
-		PreparedStatement statement = connect().prepareStatement(sql);
-
-		ResultSet result=statement.executeQuery();
-		if(result.next())
-		{
-			Problem problem =new Problem();
-			problem.setPl_id(result.getInt("pl_id"));
-			problem.setTch_id(result.getInt("tch_id"));
-			problem.setPlt_id(result.getInt("plt_id"));
-			problem.setPl_name(result.getString("pl_name"));
-			problem.setPl_degree(result.getString("pl_degree"));
-			problem.setPl_need(result.getString("pl_degree"));
-			problem.setPl_eva_mode(result.getString("pl_eva_mode"));
-			problem.setMax_person(result.getInt("max_person"));
-			return problem;
-		}
-		return null;
-	}
 	
 	@Override
 	public Problem select(String key,String value) throws Exception{

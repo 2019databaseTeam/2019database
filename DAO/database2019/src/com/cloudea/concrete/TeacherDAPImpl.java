@@ -1,4 +1,4 @@
-package dao2;
+package com.cloudea.concrete;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

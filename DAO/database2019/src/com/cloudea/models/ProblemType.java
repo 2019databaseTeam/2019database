@@ -20,5 +20,6 @@ public class ProblemType  {
 	public void setPl_type(String pl_type) {
 		this.pl_type = pl_type;
 	}
+}
 	
 

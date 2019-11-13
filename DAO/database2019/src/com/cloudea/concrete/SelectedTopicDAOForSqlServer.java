@@ -1,4 +1,4 @@
-package dao3;
+package com.cloudea.concrete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -101,7 +101,7 @@ public class SelectedTopicDAOForSqlServer extends SqlServerConnector implements 
 		 public List<SelectedTopic> selectAll() throws Exception {
 				String sql="select * from SelectedTopic";
 				PreparedStatement statement=connect().prepareStatement(sql);
-				List <SelectedTopic> selectedTopics=new ArrayList<SelectedTopic>();
+				List <SelectedTopic> selectedTopics = new ArrayList<SelectedTopic>();
 				ResultSet results=statement.executeQuery();
 				while(results.next())
 				{
@@ -109,7 +109,7 @@ public class SelectedTopicDAOForSqlServer extends SqlServerConnector implements 
 					selectedTopics.add(t);
 				}
 				return selectedTopics;
-			}
+		}
 
 	//public static void main(String[] args) {
 		// TODO Auto-generated method stub

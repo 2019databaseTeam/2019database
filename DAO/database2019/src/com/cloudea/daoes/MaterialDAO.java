@@ -5,7 +5,7 @@ import java.util.List;
 import com.cloudea.models.Material;
 
 public interface MaterialDAO extends DAO {
-	void inset(Material material) throws Exception;
+	void insert(Material material) throws Exception;
 	void delete(Material material) throws Exception;
 	void update(Material material) throws Exception;
 	Material select(int id) throws Exception;
