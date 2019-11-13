@@ -48,10 +48,13 @@ public class User {
 	public void setPawd(String pawd) {
 		this.pawd = pawd;
 	}
-	 
-	
+
 }
 
 
+
+
+
+	 
 
 

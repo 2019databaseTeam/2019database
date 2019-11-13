@@ -1,9 +1,9 @@
 package com.cloudea.models;
 
 public class UserPerm {
+
 	private int u_id;
 	private int pmt_id;
-	
 	public UserPerm() {
 		super();
 	}
@@ -25,5 +25,6 @@ public class UserPerm {
 		this.pmt_id = pmt_id;
 	}
 	
+
 
 }
