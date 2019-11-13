@@ -1,10 +1,8 @@
 package com.cloudea.daoes;
 
-
 import java.util.List;
 
 import com.cloudea.models.Major;
-
 
 public interface MajorDAO extends DAO {
 	void insert(Major major) throws Exception;
