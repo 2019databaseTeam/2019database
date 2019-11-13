@@ -9,7 +9,8 @@ public interface ProblemDAO extends DAO {
 	void delete(Problem problem)  throws Exception;
 	void update(Problem problem) throws Exception;
 	Problem select(int id) throws Exception;
-	Problem select(String condition) throws Exception;
+	Problem select(String key,int value) throws Exception;
+	Problem select(String key,String value) throws Exception;
 	List<Problem> selectAll() throws Exception;
 	List<Problem> selectAll(String condition) throws Exception;
 }
