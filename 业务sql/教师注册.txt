@@ -1,0 +1,21 @@
+
+insert into Admission (u_type, u_mailbox, adm, pawd)
+values(
+	2,    /*用户类型是教师*/
+	'teacher@163.com',
+	'ZhaoFang',
+	'456');
+
+insert into Teacher(tch_id, u_id, tch_name) 
+values(
+	1,   /*指定教师号*/
+	(select max(u_id) from Admission),
+	'赵方'
+);
+
+insert into User_Perm (u_id, pmt_id)
+values(
+	(select max(u_id) from Admission)
+	,
+	3  /*权限3 代表教师相关权限*/
+)

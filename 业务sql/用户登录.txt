@@ -1,0 +1,12 @@
+
+/*判断是否有相应账号密码的用户*/
+select * from Admission
+where adm = 'ZhaoFang' and pawd = '456'; 
+
+/*添加登录日志*/
+insert into Log_in (u_id, in_time)
+values(
+	(select u_id from Admission where adm = 'ZhaoFang' and pawd = '456' ),
+	GETDATE()
+)
+

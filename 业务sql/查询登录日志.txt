@@ -1,0 +1,3 @@
+/*查询赵方的登录日志*/
+select Admission.adm, Log_in.in_time from Log_in, Admission
+where Log_in.u_id = Admission.u_id
