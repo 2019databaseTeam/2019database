@@ -1,0 +1,5 @@
+/*判断赵方是否有教师相关权限*/
+
+select Admission.adm, User_Perm.pmt_id, Perm.per_context from User_Perm, Admission, Perm
+where User_Perm.pmt_id = 3 and User_Perm.u_id = Admission.u_id
+and User_Perm.pmt_id = Perm.pmt_id

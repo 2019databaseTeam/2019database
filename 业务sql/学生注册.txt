@@ -1,0 +1,22 @@
+
+insert into Admission (u_type, u_mailbox, adm, pawd)
+values(
+	3,    /*用户类型是学生*/
+	'123@163.com',
+	'Lihua',
+	'456');
+
+insert into Student(stu_id, u_id, SN, mjr_id) 
+values(
+	1,   /*指定学号*/
+	(select max(u_id) from Admission),
+	'李华',
+	1    /*指定专业是计算机科学与技术*/
+);
+
+insert into User_Perm (u_id, pmt_id)
+values(
+	(select max(u_id) from Admission)
+	,
+	4  /*权限4 代表学生相关权限*/
+)
