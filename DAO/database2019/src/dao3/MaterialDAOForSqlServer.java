@@ -1,4 +1,4 @@
-package com.cloudea.daoImpl;
+package dao3;
 
 public class MaterialDAOForSqlServer {
 
