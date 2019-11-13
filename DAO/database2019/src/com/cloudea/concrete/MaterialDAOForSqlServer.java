@@ -1,4 +1,4 @@
-package dao3;
+package com.cloudea.concrete;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -140,8 +140,6 @@ public  class MaterialDAOForSqlServer extends SqlServerConnector implements Mate
 			return materials;
 			
 			}
-		
-	
 
 	//public static void main(String[] args) {
 		// TODO Auto-generated method stub
