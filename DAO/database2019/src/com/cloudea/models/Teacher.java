@@ -1,6 +1,7 @@
 package com.cloudea.models;
 
 public class Teacher {
+
 	private int tch_id,u_id;
 	private String tch_name;
 	public Teacher() {}
@@ -27,4 +28,5 @@ public class Teacher {
 	public void setTch_name(String tch_name) {
 		this.tch_name = tch_name;
 	}
+
 }

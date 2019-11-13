@@ -20,4 +20,5 @@ public class ProblemProfession {
 		this.mjr_id = mjr_id;
 	}
 	
+
 }

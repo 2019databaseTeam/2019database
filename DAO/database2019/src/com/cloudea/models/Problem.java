@@ -1,6 +1,7 @@
 package com.cloudea.models;
 
 public class Problem {
+
 	private int pl_id,tch_id,plt_id,max_person;
 	private String pl_name,pl_degree,pl_need,pl_eva_mode;
 	public Problem(){}

@@ -21,4 +21,4 @@ public class ProblemType  {
 		this.pl_type = pl_type;
 	}
 	
-}
+
