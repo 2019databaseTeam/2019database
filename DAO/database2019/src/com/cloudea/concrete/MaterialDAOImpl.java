@@ -55,7 +55,6 @@ public  class MaterialDAOImpl extends SqlServerConnector implements MaterialDAO 
 			PreparedStatement statement=connect().prepareStatement(selectSql);
 			statement.setInt(1, m_id);
 			ResultSet results=statement.executeQuery();
-			System.out.println("m_id"+"  "+"stu_id"+"  "+"m_text");
 			if(results.next())
 			{
 				Material material=new Material();

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.cloudea.connector.SqlServerConnector;
 import com.cloudea.daoes.StudentDAO;
+import com.cloudea.models.SelectedTopic;
 import com.cloudea.models.Student;
 
 public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
@@ -15,18 +16,19 @@ public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
     public static StudentDAOImpl getInstance() {return StudentDAOImpl.instance;};
     private StudentDAOImpl() {}
 		
-		private static final String insertSql = "insert into Student (u_id,SN,mjr_id) values(?, ?,?)";
+		private static final String insertSql = "insert into Student (stu_id,u_id,SN,mjr_id) values(?,?, ?,?) ";
 
 		 private static final String deleteSql = "delete from Student where stu_id = ?";
 
-		 private static final String updateSql = "update Student set u_id = ?, SN = ?,mjr_id=? where stu_id=?";
+		 private static final String updateSql = "update Student set  u_id = ?, SN = ?,mjr_id=? where stu_id=? ";
 
 		 private static final String selectSql = "select * from Student where stu_id = ?";
 	public void insert(Student student) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, student.getU_id());
-		statement.setString(2,student.getSN());
-		statement.setInt(3, student.getMjr_id());
+		statement.setInt(1, student.getStu_id());
+		statement.setInt(2, student.getU_id());
+		statement.setString(3,student.getSN());
+		statement.setInt(4, student.getMjr_id());
 		statement.execute();
 		
 	}
@@ -42,10 +44,10 @@ public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
 	public void update(Student student) throws Exception {
 		// TODO Auto-generated method stub
 		PreparedStatement statement=connect().prepareStatement(updateSql);
+		statement.setInt(4, student.getStu_id());
 		statement.setInt(1, student.getU_id());
 		statement.setString(2,student.getSN());
 		statement.setInt(3, student.getMjr_id());
-		statement.setInt(4, student.getStu_id());
 		statement.execute();
 		
 	}
@@ -72,9 +74,8 @@ public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
 	@Override
 	public Student select(String key, String value) throws Exception {
 		// TODO Auto-generated method stub
-		String sql1 = "select * from Selection where "+key+"='"+value+"'";
+		String sql1 = "select * from Student where "+key+" =  "+value+"   ";
 		PreparedStatement statement=connect().prepareStatement(sql1);
-			statement.setString(1, "stu_id");
 			ResultSet results=statement.executeQuery();
 			if(results.next())
 			{
@@ -105,7 +106,7 @@ public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
 
 	@Override
 	public List<Student> selectAll(String condition) throws Exception {
-		String sql="select * from Student"+condition;
+		String sql="select * from Student "+condition;
 		PreparedStatement statement=connect().prepareStatement(sql);
 		List <Student> students=new ArrayList<Student>();
 		ResultSet results=statement.executeQuery();
@@ -116,6 +117,18 @@ public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
 		}
 		return students;
 	}
-	
+	 public static void main(String[] args) {
+		 StudentDAOImpl a=new StudentDAOImpl();
+		 try {
+			
+			 //a.insert(new Student(3,3,"libai",1));
+			 a.delete(new Student(3,4,"libai",6));
+			 //a.delete(new SelectedTopic(2,3,"2019-1-1"));
+			 //a.update(new SelectedTopic(1,4,"2019-9-9"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

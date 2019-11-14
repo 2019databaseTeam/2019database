@@ -1,6 +1,5 @@
 package com.cloudea.concrete;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -79,7 +78,6 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 	public Selection select(String key, String value) throws Exception {
 		String sql1 = "select * from Selection where "+key+"='"+value+"'";
 		PreparedStatement statement=connect().prepareStatement(sql1);
-			statement.setString(1, "sec_id");
 			ResultSet results=statement.executeQuery();
 			if(results.next())
 			{
@@ -112,7 +110,7 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 
 	@Override
 	public List<Selection> selectAll(String condition) throws Exception {
-		String sql="select * from Selection"+condition;
+		String sql="select * from Selection "+condition;
 		PreparedStatement statement=connect().prepareStatement(sql);
 		List <Selection> selections=new ArrayList<Selection>();
 		ResultSet results=statement.executeQuery();
