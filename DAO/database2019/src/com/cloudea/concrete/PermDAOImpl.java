@@ -17,8 +17,8 @@ public class PermDAOImpl extends SqlServerConnector implements PermDAO {
 	private PermDAOImpl() {}
 	private static final String insertSql="insert into Perm values(?,?)";
 	private static final String deleteSql="delete from Perm where pmt_id = ?";
-	private static final String updateSql="update Perm set pmt_id=?,per_context=?";
-	private static final String selectSql="select * from Perm where 'pmt_id'=?";
+	private static final String updateSql="update Perm set per_context=? where pmt_id=?";
+	private static final String selectSql="select * from Perm where pmt_id=?";
 	
 	
 	@Override
@@ -39,8 +39,8 @@ public class PermDAOImpl extends SqlServerConnector implements PermDAO {
 	@Override
 	public void update(Perm perm) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, perm.getPmt_id());
-		statement.setString(2, perm.getPer_context());
+		statement.setInt(2, perm.getPmt_id());
+		statement.setString(1, perm.getPer_context());
 		statement.execute();
 	}
 
@@ -71,31 +71,18 @@ public class PermDAOImpl extends SqlServerConnector implements PermDAO {
 		return Perms;
 	}
 
-	public List<Perm> selectAll(String condition) throws Exception {
-		String sql="select * from Perm where"+condition;
-		PreparedStatement statement = connect().prepareStatement(sql);
-		List<Perm>Perms=new ArrayList<Perm>();
-		ResultSet result=statement.executeQuery();
-		while(result.next())
-		{
-			Perm t = new Perm(result.getInt(1),result.getString(2));
-			Perms.add(t);
-			
-		}
-		return Perms;
-	}
 	
-//	public static void main(String args[])
-//	{
-//		Perm perm = new Perm(5,"测试用权限");
-//		PermDAOImpl l=new PermDAOImpl();
-//		try {
-//			l.selectAll();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	public static void main(String args[])
+	{
+		Perm perm = new Perm(5,"测试用权限");
+		PermDAOImpl l=new PermDAOImpl();
+		try {
+			l.insert(perm);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 
 
