@@ -6,6 +6,7 @@ import com.cloudea.concrete.*;
 public class DAOFactoryForSqlServer extends DAOFactory {
 
 	@Override
+	public
 	DAO getDAO(String name) {
 		if(name.equals("Administrator")) {
 			return AdministratorDAOImpl.getInstance();
