@@ -6,7 +6,6 @@ import java.util.List;
 import com.cloudea.connector.SqlServerConnector;
 import com.cloudea.daoes.AdministratorDAO;
 import com.cloudea.models.Administrator;
-import com.cloudea.models.Major;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

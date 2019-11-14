@@ -1,6 +1,6 @@
 package com.cloudea.concrete;
 
-import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
     public static SelectionDAOImpl getInstance() {return SelectionDAOImpl.instance;};
     private SelectionDAOImpl() {}
 		
-		private static final String insertSql = "insert into Selection values(?, ?,?,?)";
+		private static final String insertSql = "insert into Selection(stu_id,priority,pl_id,m_id,sa_id) values(?,?,?,?,?)";
 
 		 private static final String deleteSql = "delete from Selection where sec_id = ?";
 
-		 private static final String updateSql = "update Selection set stu_id = ?, priority = ?,pl_id=?,m_id=? where sec_id = ?";
+		 private static final String updateSql = "update Selection set stu_id = ?, priority = ?,pl_id=?,m_id=?,sa_id=? where sec_id = ?";
 
 		 private static final String selectSql = "select * from Selection where sec_id = ?";
 
@@ -31,6 +31,7 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 		statement.setInt(2,selection.getPriority());
 		statement.setInt(3, selection.getPl_id());
 		statement.setInt(4,selection.getM_id());
+		statement.setInt(5,selection.getSa_id());
 		statement.execute();
 		
 	}
@@ -49,7 +50,8 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 		statement.setInt(2,selection.getPriority());
 		statement.setInt(3, selection.getPl_id());
 		statement.setInt(4,selection.getM_id() );
-		statement.setInt(1, selection.getSec_id());
+		statement.setInt(5,selection.getSa_id());
+		statement.setInt(6, selection.getSec_id());
 		statement.execute();
 	}
 
@@ -66,6 +68,7 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 			selection.setPriority(results.getInt("priority"));
 			selection.setPl_id(results.getInt("pl_id"));
 			selection.setM_id(results.getInt("m_id"));
+			selection.setSa_id(results.getInt("sa_id"));
 			return selection;
 			
 		}
@@ -74,10 +77,8 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 
 	@Override
 	public Selection select(String key, String value) throws Exception {
-		String sql1 = "select * from Selection where ? = ?";
+		String sql1 = "select * from Selection where "+key+"='"+value+"'";
 		PreparedStatement statement=connect().prepareStatement(sql1);
-		if(key=="sec_id")
-		{
 			statement.setString(1, "sec_id");
 			ResultSet results=statement.executeQuery();
 			if(results.next())
@@ -91,71 +92,8 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 				return selection;
 				
 			}
-		}
-		else if(key=="stu_id")
-		{
-			statement.setString(1, "stu_id");
-			statement.setInt(2,Integer.parseInt(value));
-			ResultSet results=statement.executeQuery();
-			if(results.next())
-			{
-				Selection selection=new Selection();
-				selection.setSec_id(results.getInt("sec_id"));
-				selection.setStu_id(results.getInt("stu_id"));
-				selection.setPriority(results.getInt("priority"));
-				selection.setPl_id(results.getInt("pl_id"));
-				selection.setM_id(results.getInt("m_id"));
-				return selection;
-			}
-		}
-		else if(key=="priority")
-		{
-			statement.setString(1, "priority");
-			statement.setInt(2,Integer.parseInt(value));
-			ResultSet results=statement.executeQuery();
-			if(results.next())
-			{
-				Selection selection=new Selection();
-				selection.setSec_id(results.getInt("sec_id"));
-				selection.setStu_id(results.getInt("stu_id"));
-				selection.setPriority(results.getInt("priority"));
-				selection.setPl_id(results.getInt("pl_id"));
-				selection.setM_id(results.getInt("m_id"));
-				return selection;
-			}
-		}
-		else if(key=="pl_id")
-		{
-			statement.setString(1, "pl_id");
-			statement.setInt(2,Integer.parseInt(value));
-			ResultSet results=statement.executeQuery();
-			if(results.next())
-			{
-				Selection selection=new Selection();
-				selection.setSec_id(results.getInt("sec_id"));
-				selection.setStu_id(results.getInt("stu_id"));
-				selection.setPriority(results.getInt("priority"));
-				selection.setPl_id(results.getInt("pl_id"));
-				selection.setM_id(results.getInt("m_id"));
-				return selection;
-			}
-		}
-		else if(key=="m_id")
-		{
-			statement.setString(1, "m_id");
-			statement.setInt(2,Integer.parseInt(value));
-			ResultSet results=statement.executeQuery();
-			if(results.next())
-			{
-				Selection selection=new Selection();
-				selection.setSec_id(results.getInt("sec_id"));
-				selection.setStu_id(results.getInt("stu_id"));
-				selection.setPriority(results.getInt("priority"));
-				selection.setPl_id(results.getInt("pl_id"));
-				selection.setM_id(results.getInt("m_id"));
-				return selection;
-			}
-		}
+		
+		
 		return null;
 	}
 
@@ -166,7 +104,7 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 		ResultSet results=statement.executeQuery();
 		while(results.next())
 		{
-			Selection t=new Selection(results.getInt(1),results.getInt(2),results.getInt(3),results.getInt(4),results.getInt(5));
+			Selection t=new Selection(results.getInt(1),results.getInt(2),results.getInt(3),results.getInt(4),results.getInt(5),results.getInt(6));
 			selections.add(t);
 		}
 		return selections;
@@ -180,7 +118,7 @@ public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO
 		ResultSet results=statement.executeQuery();
 		while(results.next())
 		{
-			Selection t=new Selection(results.getInt(1),results.getInt(2),results.getInt(3),results.getInt(4),results.getInt(5));
+			Selection t=new Selection(results.getInt(1),results.getInt(2),results.getInt(3),results.getInt(4),results.getInt(5),results.getInt(6));
 			selections.add(t);
 		}
 		return selections;

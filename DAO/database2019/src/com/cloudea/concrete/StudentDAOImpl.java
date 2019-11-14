@@ -1,14 +1,12 @@
 package com.cloudea.concrete;
 
-import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.cloudea.connector.SqlServerConnector;
 import com.cloudea.daoes.StudentDAO;
-import com.cloudea.models.Selection;
 import com.cloudea.models.Student;
 
 public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
@@ -74,10 +72,8 @@ public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
 	@Override
 	public Student select(String key, String value) throws Exception {
 		// TODO Auto-generated method stub
-		String sql1 = "select * from Selection where ? = ?";
+		String sql1 = "select * from Selection where "+key+"='"+value+"'";
 		PreparedStatement statement=connect().prepareStatement(sql1);
-		if(key=="stu_id")
-		{
 			statement.setString(1, "stu_id");
 			ResultSet results=statement.executeQuery();
 			if(results.next())
@@ -90,53 +86,6 @@ public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
 				return student;
 				
 			}
-		}
-		else if(key=="u_id")
-		{
-			statement.setString(1, "u_id");
-			statement.setInt(2,Integer.parseInt(value));
-			ResultSet results=statement.executeQuery();
-			if(results.next())
-			{
-				Student student=new Student();
-				student.setStu_id(results.getInt("stu_id"));
-				student.setU_id(results.getInt("u_id"));
-				student.setSN(results.getString("SN"));
-				student.setMjr_id(results.getInt("mjr_id"));
-				return student;
-			}
-		}
-		else if(key=="SN")
-		{
-			statement.setString(1, "SN");
-			statement.setString(2,value);
-			ResultSet results=statement.executeQuery();
-			if(results.next())
-			{
-				Student student=new Student();
-				student.setStu_id(results.getInt("stu_id"));
-				student.setU_id(results.getInt("u_id"));
-				student.setSN(results.getString("SN"));
-				student.setMjr_id(results.getInt("mjr_id"));
-				return student;
-			}
-			
-		}
-		else if(key=="mjr_id")
-		{
-			statement.setString(1, "mjr_id");
-			statement.setInt(2,Integer.parseInt(value));
-			ResultSet results=statement.executeQuery();
-			if(results.next())
-			{
-				Student student=new Student();
-				student.setStu_id(results.getInt("stu_id"));
-				student.setU_id(results.getInt("u_id"));
-				student.setSN(results.getString("SN"));
-				student.setMjr_id(results.getInt("mjr_id"));
-				return student;
-			}
-		}
 		return null;
 	}
 
@@ -166,7 +115,6 @@ public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
 			students.add(t);
 		}
 		return students;
-		
 	}
 	
 
