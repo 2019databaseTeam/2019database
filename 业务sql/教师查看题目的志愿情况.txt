@@ -1,0 +1,18 @@
+
+/*老师查看某个选题的志愿情况-以第二题为例*/
+
+select
+	Student.stu_id as [学号], 
+	Student.SN [学生姓名],
+	Selection.pl_id as [题目ID],
+	Material.m_text as [文字材料],
+	Material.m_proof as [佐证材料],
+	Selection.priority as [志愿优先级]
+from 
+	Student inner join Selection on 
+		Student.stu_id = Selection.stu_id  and
+		Selection.pl_id = 2
+	left join Material on
+		Student.stu_id = Material.stu_id and
+		Selection.m_id = Material.m_id
+

@@ -1,0 +1,4 @@
+/*查询某个学生某个题目的报告*/
+
+select * from Report
+where Report.stu_id = 1 and Report.pl_id = 2

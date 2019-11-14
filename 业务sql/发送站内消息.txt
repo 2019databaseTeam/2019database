@@ -1,0 +1,9 @@
+/*发送站内消息*/
+
+insert into ChatRecord(u_id_send, u_id_receive, time, content)
+values(
+	4,
+	3,
+	GETDATE(),
+	'同学你好，你的报告我已经看了'
+)

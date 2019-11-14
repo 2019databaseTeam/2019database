@@ -1,0 +1,5 @@
+/*查询发送给自己的消息*/
+
+/*以李华为例*/
+select * from ChatRecord
+where ChatRecord.u_id_receive = 3

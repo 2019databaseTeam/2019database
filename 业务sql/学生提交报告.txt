@@ -1,0 +1,12 @@
+/*学生提交报告*/
+
+/*以月报为例*/
+
+insert into Report (stu_id, pl_id, rept_id, [time], content_report)
+values(
+	1,  /*代表李华*/
+	2,  /*李华所选择题目的id*/
+	1,  /*代表是月报*/
+	GETDATE(),
+	'在这一个月里，我把软件的需求分析、总体设计做完了....'
+)

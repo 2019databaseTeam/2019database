@@ -1,0 +1,31 @@
+
+/*学生填写志愿*/
+
+/*添加第一志愿*/
+insert into Selection (stu_id, [priority],  pl_id, m_id, sa_id)
+values(
+	1,  /*李华的id*/
+	1,  /*表示第一志愿*/
+	2,  /*表示题目：《测试2-基于XXX的管理系统》*/
+	1,   /*表示使用第一个材料*/
+	1   /*表示：2017级毕业设计选题*/
+)
+
+insert into Selection (stu_id, [priority],  pl_id, m_id, sa_id)
+values(
+	1,  /*李华的id*/
+	2,  /*表示第二志愿*/
+	3,  /*表示题目：《测试3-基于XXX的管理系统》*/
+	1,   /*表示使用第一个材料*/
+	1   /*表示：2017级毕业设计选题*/
+)
+
+
+insert into Selection (stu_id, [priority],  pl_id, m_id, sa_id)
+values(
+	1,  /*李华的id*/
+	3,  /*表示第三志愿*/
+	4,  /*表示题目：《基于XXX的建模分析》*/
+	2,   /*表示使用第二个材料*/
+	1   /*表示：2017级毕业设计选题*/
+)
