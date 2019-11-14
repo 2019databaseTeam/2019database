@@ -15,7 +15,7 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 	public static UserDAOImpl getInstance() {return UserDAOImpl.instance;};
 	
 	private UserDAOImpl() {}
-	private static final String insertSql="insert into Admission values(?,?,?,?)";
+	private static final String insertSql="insert into Admission(u_type,u_mailbox,adm,pawd) values(?,?,?,?)";
 	private static final String deleteSql="delete from Admission where u_id = ?";
 	private static final String updateSql="update Admission set u_type=?,u_mailbox=?,adm=?,pawd=? where u_id=?";
 	private static final String selectSql="select * from Admission where u_id=?";
@@ -24,7 +24,6 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 	@Override
 	public void insert(User user) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-
 		statement.setInt(1,user.getU_type());
 		statement.setString(2,user.getU_mailbox());
 		statement.setString(3,user.getAdm());
@@ -114,17 +113,6 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 		return Users;
 	}
 
-//	public static void main(String args[])
-//	{
-//	User user=new User(2,1,"te","te","t");
-//	UserDAOImpl l=new UserDAOImpl();
-//	try {
-//		l.update(user);
-//	} catch (Exception e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//	}
 }
 
 

@@ -65,7 +65,7 @@ public class DAOFactoryForSqlServer extends DAOFactory {
 		else if(name.equals("UserPerm")){
 			return UserPermDAOImpl.getInstance();
 		}
-		else if(name.equals("UserTypeDAO")){
+		else if(name.equals("UserType")){
 			return UserTypeDAOImpl.getInstance();
 		}
 		
