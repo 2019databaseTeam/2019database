@@ -1,0 +1,38 @@
+/*赵方老师出一个题*/
+
+/*向题目表里添加数据*/
+insert into Problem (tch_id, plt_id, pl_name, pl_degree, pl_need, pl_eva_mode, max_person)
+values(
+	1,   /*赵方老师的的老师号是1*/
+	2,  /*2表示题目类型是“应用系统”*/
+	'基于XXX的管理系统',
+	5, /*难度5颗星*/
+	'1. 需要实现登录功能 2. 需要能够支持多用户 ....',
+	'代码整洁 + 10分， 实现基本功能 80分 ,实现创建功能 + 20分 ... ',
+	100 /*最多有100人选择此题*/
+);
+
+/*添加专业限制*/
+
+insert into ProblemProfession values(
+	(select max(pl_id) from Problem),
+	1  /*计算机科学与技术可以选择此题*/
+);
+
+
+insert into ProblemProfession values(
+	(select max(pl_id) from Problem),
+	2  /*网络工程可以选择此题*/
+);
+
+
+insert into ProblemProfession values(
+	(select max(pl_id) from Problem),
+	3  /*数字媒体与技术可以选择此题*/
+);
+
+
+insert into ProblemProfession values(
+	(select max(pl_id) from Problem),
+	4  /*物联网可以选择此题*/
+);
