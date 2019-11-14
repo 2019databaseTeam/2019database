@@ -17,10 +17,10 @@ public class ProblemProfessionDAOImpl extends SqlServerConnector implements Prob
 	private ProblemProfessionDAOImpl() {}
 	
 	
-	private static final String insertSql="insert into Teacher values(?,?)";
-	private static final String deleteSql="delete from Teacher where pl_id = ? and mjr_id=?";
-	private static final String updateSql="update Teacher set pl_id = ?,mjr_id=?";
-	private static final String selectSql="select * from Teacher where 'pl_id'=?";
+	private static final String insertSql="insert into ProblemProfession values(?,?)";
+	private static final String deleteSql="delete from ProblemProfession where pl_id = ? and mjr_id=?";
+	private static final String updateSql="update ProblemProfession set pl_id = ?,mjr_id=?";
+	private static final String selectSql="select * from ProblemProfession where pl_id=?";
 	public void insert(ProblemProfession PP) throws Exception{
 		PreparedStatement statement=connect().prepareStatement(insertSql);
 		statement.setInt(1, PP.getPl_id());

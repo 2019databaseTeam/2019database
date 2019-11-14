@@ -2,7 +2,7 @@ package com.cloudea.models;
 
 public class User {
 	 private int u_id;
-	 private String u_type;
+	 private int u_type;
 	 private String u_mailbox;
 	 private String adm;
 	 private String pawd;
@@ -10,9 +10,16 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(int u_id, String u_type, String u_mailbox, String adm, String pawd) {
+	public User(int u_id, int u_type, String u_mailbox, String adm, String pawd) {
 		super();
 		this.u_id = u_id;
+		this.u_type = u_type;
+		this.u_mailbox = u_mailbox;
+		this.adm = adm;
+		this.pawd = pawd;
+	}
+	public User(int u_type, String u_mailbox, String adm, String pawd) {
+		super();
 		this.u_type = u_type;
 		this.u_mailbox = u_mailbox;
 		this.adm = adm;
@@ -24,10 +31,10 @@ public class User {
 	public void setU_id(int u_id) {
 		this.u_id = u_id;
 	}
-	public String getU_type() {
+	public int getU_type() {
 		return u_type;
 	}
-	public void setU_type(String u_type) {
+	public void setU_type(int u_type) {
 		this.u_type = u_type;
 	}
 	public String getU_mailbox() {

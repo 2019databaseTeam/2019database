@@ -22,25 +22,25 @@ public class PermDAOImpl extends SqlServerConnector implements PermDAO {
 	
 	
 	@Override
-	public void insert(Perm Perm) throws Exception {
+	public void insert(Perm perm) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, Perm.getPmt_id());
-		statement.setString(2, Perm.getPer_context());
+		statement.setInt(1, perm.getPmt_id());
+		statement.setString(2, perm.getPer_context());
 		statement.execute();
 	}
 
 	@Override
-	public void delete(Perm Perm) throws Exception {
+	public void delete(Perm perm) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(deleteSql);
-		statement.setInt(1,Perm.getPmt_id());
+		statement.setInt(1,perm.getPmt_id());
 		statement.execute();
 	}
 
 	@Override
-	public void update(Perm Perm) throws Exception {
+	public void update(Perm perm) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, Perm.getPmt_id());
-		statement.setString(2, Perm.getPer_context());
+		statement.setInt(1, perm.getPmt_id());
+		statement.setString(2, perm.getPer_context());
 		statement.execute();
 	}
 
@@ -50,10 +50,8 @@ public class PermDAOImpl extends SqlServerConnector implements PermDAO {
 		statement.setInt(1,id);
 		ResultSet result=statement.executeQuery();
 		if(result.next()) {
-			Perm Perm=new Perm();
-			statement.setInt(1, Perm.getPmt_id());
-			statement.setString(2, Perm.getPer_context());
-			return Perm;
+			Perm perm=new Perm(result.getInt(1),result.getString(2));
+			return perm;
 		}
 		return null;
 	}
@@ -74,7 +72,7 @@ public class PermDAOImpl extends SqlServerConnector implements PermDAO {
 	}
 
 	public List<Perm> selectAll(String condition) throws Exception {
-		String sql="select * from Perm "+condition;
+		String sql="select * from Perm where"+condition;
 		PreparedStatement statement = connect().prepareStatement(sql);
 		List<Perm>Perms=new ArrayList<Perm>();
 		ResultSet result=statement.executeQuery();
@@ -82,54 +80,22 @@ public class PermDAOImpl extends SqlServerConnector implements PermDAO {
 		{
 			Perm t = new Perm(result.getInt(1),result.getString(2));
 			Perms.add(t);
+			
 		}
 		return Perms;
 	}
-	//public static void main(String args[]) throws Exception {
-		//MajorDAOImpl t=new MajorDAOImpl();
-		//t.selectAll("where mjr_id=1");
-	//}
-
-//	@Override
-//	public void insert(Perm Perm) throws Exception {
-//		// TODO Auto-generated method stub
-//		
+	
+//	public static void main(String args[])
+//	{
+//		Perm perm = new Perm(5,"≤‚ ‘”√»®œﬁ");
+//		PermDAOImpl l=new PermDAOImpl();
+//		try {
+//			l.selectAll();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //	}
-//
-//	@Override
-//	public void delete(Perm Perm) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void update(Perm Perm) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public Perm select(int id) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Perm select(String key, String value) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	public void main(String args[])
-	{
-		Perm ll=new Perm();
-		PermDAOImpl l=new PermDAOImpl();
-		try {
-			l.insert(ll);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
 
 

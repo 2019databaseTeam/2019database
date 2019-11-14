@@ -16,17 +16,16 @@ public class MajorDAOImpl extends SqlServerConnector implements MajorDAO {
 	public static MajorDAOImpl getInstance() {return MajorDAOImpl.instance;};
 	
 	private MajorDAOImpl() {}
-	private static final String insertSql="insert into Major values(?,?)";
-	private static final String deleteSql="delete from Major where jr_id = ?";
-	private static final String updateSql="update Major set mjr_id=?,mjr_name=?";
-	private static final String selectSql="select * from major where 'mjr_id'=?";
+	private static final String insertSql="insert into Major(mjr_name) values(?)";
+	private static final String deleteSql="delete from Major where mjr_id = ?";
+	private static final String updateSql="update Major setmjr_name=?  where mjr_id=?";
+	private static final String selectSql="select * from Major where mjr_id=?";
 	
 	
 	@Override
 	public void insert(Major major) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, major.getMajorId());
-		statement.setString(2, major.getMajorName());
+		statement.setString(1, major.getMajorName());
 		statement.execute();
 	}
 
@@ -40,8 +39,8 @@ public class MajorDAOImpl extends SqlServerConnector implements MajorDAO {
 	@Override
 	public void update(Major major) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, major.getMajorId());
-		statement.setString(2, major.getMajorName());
+		statement.setString(1, major.getMajorName());
+		statement.setInt(2, major.getMajorId());
 		statement.execute();
 	}
 
@@ -76,9 +75,8 @@ public class MajorDAOImpl extends SqlServerConnector implements MajorDAO {
 	}
 
 	public Major select(String key, int value) throws Exception {
-		String sql="select * from major where "+key+"='"+value+"'";
+		String sql="select * from major where "+key+"='"+String.valueOf(value)+"'";
 		PreparedStatement statement = connect().prepareStatement(sql);
-
 		ResultSet result=statement.executeQuery();
 		if(result.next())
 		{
@@ -116,9 +114,10 @@ public class MajorDAOImpl extends SqlServerConnector implements MajorDAO {
 		}
 		return majors;
 	}
-	//public static void main(String args[]) throws Exception {
-		//MajorDAOImpl t=new MajorDAOImpl();
-		//t.selectAll("where mjr_id=1");
-	//}
+//	public static void main(String args[]) throws Exception {
+//		MajorDAOImpl t=new MajorDAOImpl();
+//		t.insert(new Major("213"));
+//		t.selectAll("where mjr_id=1");
+//	}
 }
 

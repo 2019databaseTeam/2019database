@@ -16,44 +16,41 @@ public class UserPermDAOImpl extends SqlServerConnector implements UserPermDAO {
 	
 	private UserPermDAOImpl() {}
 	private static final String insertSql="insert into UserPerm values(?,?)";
-	private static final String deleteSql="delete from UserPerm where u_id = ? and pmt_id=?";
+	private static final String deleteSql="delete from UserPerm where u_id = ?";
 	private static final String updateSql="update UserPerm set u_id=?,pmt_id=?";
-	private static final String selectSql="select * from UserPerm where 'u_id'=? and pmt_id=?";
+	private static final String selectSql="select * from UserPerm where u_id=? and pmt_id=?";
 	
 	
 	@Override
-	public void insert(UserPerm UserPerm) throws Exception {
+	public void insert(UserPerm userPerm) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, UserPerm.getU_id());
-		statement.setInt(2, UserPerm.getPmt_id());
+		statement.setInt(1, userPerm.getU_id());
+		statement.setInt(2, userPerm.getPmt_id());
 		statement.execute();
 	}
 
 	@Override
-	public void delete(UserPerm UserPerm) throws Exception {
+	public void delete(UserPerm userPerm) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(deleteSql);
-		statement.setInt(1,UserPerm.getU_id());
+		statement.setInt(1,userPerm.getU_id());
 		statement.execute();
 	}
 
 	@Override
-	public void update(UserPerm UserPerm) throws Exception {
+	public void update(UserPerm userPerm) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, UserPerm.getU_id());
-		statement.setInt(2, UserPerm.getPmt_id());
+		statement.setInt(1, userPerm.getU_id());
+		statement.setInt(2, userPerm.getPmt_id());
 		statement.execute();
 	}
 
 	@Override
-	public UserPerm select(int u_id, int pmt_id) throws Exception{
+	public UserPerm select(int u_id) throws Exception{
 		PreparedStatement statement = connect().prepareStatement(selectSql);
 		statement.setInt(1,u_id);
-		statement.setInt(2, pmt_id);
 		ResultSet result=statement.executeQuery();
 		if(result.next()) {
-			UserPerm UserPerm=new UserPerm();
-			statement.setInt(1, UserPerm.getU_id());
-			statement.setInt(2, UserPerm.getPmt_id());
+			UserPerm UserPerm=new UserPerm(result.getInt(1),result.getInt(2));
 			return UserPerm;
 		}
 		return null;
@@ -86,57 +83,32 @@ public class UserPermDAOImpl extends SqlServerConnector implements UserPermDAO {
 		}
 		return UserPerms;
 	}
-	//public static void main(String args[]) throws Exception {
-		//MajorDAOImpl t=new MajorDAOImpl();
-		//t.selectAll("where mjr_id=1");
-	//}
-
-//	@Override
-//	public void insert(UserPerm UserPerm) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void delete(UserPerm UserPerm) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void update(UserPerm UserPerm) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public UserPerm select(int id) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public UserPerm select(String key, String value) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	public void main(String args[])
-	{
-		UserPerm ll=new UserPerm();
-		UserPermDAOImpl l=new UserPermDAOImpl();
-		try {
-			l.insert(ll);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 
 	@Override
 	public List<UserPerm> selectAll(int u_id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="select * from UserPerm where u_id="+String.valueOf(u_id);
+		PreparedStatement statement = connect().prepareStatement(sql);
+		List<UserPerm>UserPerms=new ArrayList<UserPerm>();
+		ResultSet result=statement.executeQuery();
+		while(result.next())
+		{
+			UserPerm t = new UserPerm(result.getInt(1),result.getInt(2));
+			UserPerms.add(t);
+		}
+		return UserPerms;
 	}
+//	public static void main(String args[])
+//	{
+//		UserPerm perm = new UserPerm(1,2);
+//		UserPermDAOImpl l=new UserPermDAOImpl();
+//		try {
+//			l.insert(perm);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }
 
 

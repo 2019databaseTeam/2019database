@@ -22,7 +22,7 @@ public class SelectedTopicDAOForSqlServer extends SqlServerConnector implements 
 
 		 private static final String deleteSql = "delete from SelectedTopic where stu_id = ?";
 
-		 private static final String updateSql = "update SelectedTopic set  stu_id = ?, pl_id = ?";
+		 private static final String updateSql = "update SelectedTopic set stu_id = ?, pl_id = ?";
 
 		 private static final String selectSql = "select * from SelectedTopic where stu_id = ?";
 		 
@@ -111,9 +111,17 @@ public class SelectedTopicDAOForSqlServer extends SqlServerConnector implements 
 				return selectedTopics;
 		}
 
-	//public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	 public static void main(String[] args) {
+		 SelectedTopicDAOForSqlServer a=new SelectedTopicDAOForSqlServer();
+		/* try {
+			a.insert(new SelectedTopic(1,2));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+	  
      
-	//}
+	}
 
 }

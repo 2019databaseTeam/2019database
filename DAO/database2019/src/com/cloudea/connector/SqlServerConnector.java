@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class SqlServerConnector implements Connector {
 	
-	private String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=test;user=cloudea;password=123456";
+	private String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=2019database;user=sa;password=111111";
 	public SqlServerConnector() {}
 	
 	@Override
@@ -13,6 +13,7 @@ public class SqlServerConnector implements Connector {
 		try {
 			return DriverManager.getConnection(url);
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

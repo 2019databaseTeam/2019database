@@ -16,22 +16,21 @@ public class SelectionDAOForSqlServer extends SqlServerConnector implements Sele
     public static SelectionDAOForSqlServer getInstance() {return SelectionDAOForSqlServer.instance;};
     private SelectionDAOForSqlServer() {}
 		
-		private static final String insertSql = "insert into Materila values(?, ?, ?,?,?)";
+		private static final String insertSql = "insert into Materila values(?, ?,?,?)";
 
 		 private static final String deleteSql = "delete from Material where sec_id = ?";
 
-		 private static final String updateSql = "update Materila set  sec_id = ?, stu_id = ?, priority = ?,pl_id=?,m_id=?";
+		 private static final String updateSql = "update Materila set stu_id = ?, priority = ?,pl_id=?,m_id=? where sec_id = ?";
 
 		 private static final String selectSql = "select * from Material where sec_id = ?";
 
 	
 	public void insert(Selection selection) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, selection.getSec_id());
-		statement.setInt(2, selection.getStu_id());
-		statement.setInt(3,selection.getPriority());
-		statement.setInt(4, selection.getPl_id());
-		statement.setInt(5,selection.getM_id());
+		statement.setInt(1, selection.getStu_id());
+		statement.setInt(2,selection.getPriority());
+		statement.setInt(3, selection.getPl_id());
+		statement.setInt(4,selection.getM_id());
 		statement.execute();
 		
 	}
@@ -46,11 +45,11 @@ public class SelectionDAOForSqlServer extends SqlServerConnector implements Sele
 	public void update(Selection selection) throws Exception {
 		// TODO Auto-generated method stub
 		PreparedStatement statement=connect().prepareStatement(updateSql);
+		statement.setInt(1, selection.getStu_id());
+		statement.setInt(2,selection.getPriority());
+		statement.setInt(3, selection.getPl_id());
+		statement.setInt(4,selection.getM_id() );
 		statement.setInt(1, selection.getSec_id());
-		statement.setInt(2, selection.getStu_id());
-		statement.setInt(3,selection.getPriority());
-		statement.setInt(4, selection.getPl_id());
-		statement.setInt(5,selection.getM_id() );
 		statement.execute();
 	}
 

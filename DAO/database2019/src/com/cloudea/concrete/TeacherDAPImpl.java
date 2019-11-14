@@ -20,8 +20,8 @@ public class TeacherDAPImpl extends SqlServerConnector implements TeacherDAO{
 	//pl_name,pl_degree,pl_need,pl_eva_mode;
 	private static final String insertSql="insert into Teacher values(?,?,?)";
 	private static final String deleteSql="delete from Teacher where tch_id = ?";
-	private static final String updateSql="update Teacher set tch_id=?,u_id=?,tch_name=?";
-	private static final String selectSql="select * from Teacher where 'tch_id'=?";
+	private static final String updateSql="update Teacher set u_id=?,tch_name=? where tch_id=?";
+	private static final String selectSql="select * from Teacher where tch_id=?";
 	
 	public void insert(Teacher teacher) throws Exception{
 		PreparedStatement statement=connect().prepareStatement(insertSql);
@@ -37,9 +37,9 @@ public class TeacherDAPImpl extends SqlServerConnector implements TeacherDAO{
 	}
 	public void update(Teacher teacher) throws Exception{
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, teacher.getTch_id());
-		statement.setInt(2, teacher.getU_id());
-		statement.setString(3, teacher.getTch_name());
+		statement.setInt(1, teacher.getU_id());
+		statement.setString(2, teacher.getTch_name());
+		statement.setInt(3, teacher.getTch_id());
 		statement.execute();
 	}
 	public Teacher select(int tch_id) throws Exception{

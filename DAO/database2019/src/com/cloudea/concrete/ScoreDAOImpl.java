@@ -15,7 +15,7 @@ public class ScoreDAOImpl extends SqlServerConnector implements ScoreDAO{
 	private ScoreDAOImpl() {}
 	private static final String insertSql="insert into Score values(?,?,?,?)";
 	private static final String deleteSql="delete from Score where rep_id = ?";
-	private static final String updateSql="update Score set rep_id=?,tch_id=?,score=?,comments=?";
+	private static final String updateSql="update Score set tch_id=?,score=?,comments=? where rep_id=?";
 	private static final String selectSql="select * from Score where rep_id=?";
 	
 	@Override
@@ -23,8 +23,8 @@ public class ScoreDAOImpl extends SqlServerConnector implements ScoreDAO{
 		PreparedStatement statement=connect().prepareStatement(insertSql);
 		statement.setInt(1, score.getRep_id());
 		statement.setInt(2, score.getTch_id());
-		statement.setInt(3, score.getScore());
-		statement.setString(4, score.getComments());
+		statement.setString(3, score.getComments());
+		statement.setInt(4, score.getScore());
 		statement.execute();
 	}
 	
@@ -38,10 +38,10 @@ public class ScoreDAOImpl extends SqlServerConnector implements ScoreDAO{
 	@Override
 	public void update(Score score)throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1,score.getRep_id());
-		statement.setInt(2, score.getTch_id());
-		statement.setInt(3, score.getScore());
-		statement.setString(4, score.getComments());
+		statement.setInt(1, score.getTch_id());
+		statement.setInt(2, score.getScore());
+		statement.setString(3, score.getComments());
+		statement.setInt(4,score.getRep_id());
 		statement.execute();
 	}
 	
@@ -89,7 +89,7 @@ public class ScoreDAOImpl extends SqlServerConnector implements ScoreDAO{
 		ResultSet result=statement.executeQuery();
 		while(result.next())
 		{
-			Score t = new Score(result.getInt(1),result.getInt(2),result.getInt(3),result.getString(4));
+			Score t = new Score(result.getInt(1),result.getInt(2),result.getString(3),result.getInt(4));
 			scores.add(t);
 		}
 		return scores;
@@ -103,9 +103,36 @@ public class ScoreDAOImpl extends SqlServerConnector implements ScoreDAO{
 		ResultSet result=statement.executeQuery();
 		while(result.next())
 		{
-			Score t = new Score(result.getInt(1),result.getInt(2),result.getInt(3),result.getString(4));
+			Score t = new Score(result.getInt(1),result.getInt(2),result.getString(3),result.getInt(4));
 			scores.add(t);
 		}
 		return scores;
 	}
+	
+	
+	
+	//≤‚ ‘
+//	public static void main(String[] args) throws Exception {
+//		Score score=new Score(12,1,"good good",100);
+//		Score score1=new Score(15,1,"not good",59);
+//		Score score2=new Score();
+//		ScoreDAOImpl.getInstance().insert(score);
+//		ScoreDAOImpl.getInstance().delete(score);
+//		ScoreDAOImpl.getInstance().update(score1);
+//		score2=ScoreDAOImpl.getInstance().select(15);
+//		System.out.println(score2.getRep_id()+"  "+score2.getTch_id()+" "+score2.getComments()+" "+score2.getScore());
+//		score2=ScoreDAOImpl.getInstance().select("tch_id","1");
+//		score2=ScoreDAOImpl.getInstance().select("comment","1");
+//		System.out.println(score2.getRep_id()+" "+score2.getTch_id()+" "+score2.getComments()+" "+score2.getScore());
+//		List<Score> scores;
+//		scores=ScoreDAOImpl.getInstance().selectAll();
+//		for(Score score2:scores) {
+//			System.out.println(score2.getRep_id()+" "+score2.getTch_id()+" "+score2.getComments()+" "+score2.getScore());
+//		}
+//		scores=ScoreDAOImpl.getInstance().selectAll("where score > 60 ");
+//		for(Score score2:scores) {
+//			System.out.println(score2.getRep_id()+" "+score2.getTch_id()+" "+score2.getComments()+" "+score2.getScore());
+//		}
+		
+//	}
 }

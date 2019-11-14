@@ -17,19 +17,18 @@ public class StudentDAOForSqlServer extends SqlServerConnector implements Studen
     public static StudentDAOForSqlServer getInstance() {return StudentDAOForSqlServer.instance;};
     private StudentDAOForSqlServer() {}
 		
-		private static final String insertSql = "insert into Student values(?, ?, ?,?)";
+		private static final String insertSql = "insert into Student (u_id,SN,mjr_id) values(?, ?,?)";
 
 		 private static final String deleteSql = "delete from Student where stu_id = ?";
 
-		 private static final String updateSql = "update Materila set  stu_id = ?, u_id = ?, SN = ?,mjr_id=?";
+		 private static final String updateSql = "update Materila set u_id = ?, SN = ?,mjr_id=? where stu_id=?";
 
 		 private static final String selectSql = "select * from Material where stu_id = ?";
 	public void insert(Student student) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, student.getStu_id());
-		statement.setInt(2, student.getU_id());
-		statement.setString(3,student.getSN());
-		statement.setInt(4, student.getMjr_id());
+		statement.setInt(1, student.getU_id());
+		statement.setString(2,student.getSN());
+		statement.setInt(3, student.getMjr_id());
 		statement.execute();
 		
 	}
@@ -45,10 +44,10 @@ public class StudentDAOForSqlServer extends SqlServerConnector implements Studen
 	public void update(Student student) throws Exception {
 		// TODO Auto-generated method stub
 		PreparedStatement statement=connect().prepareStatement(updateSql);
-		statement.setInt(1, student.getStu_id());
-		statement.setInt(2, student.getU_id());
-		statement.setString(3,student.getSN());
-		statement.setInt(4, student.getMjr_id());
+		statement.setInt(1, student.getU_id());
+		statement.setString(2,student.getSN());
+		statement.setInt(3, student.getMjr_id());
+		statement.setInt(4, student.getStu_id());
 		statement.execute();
 		
 	}

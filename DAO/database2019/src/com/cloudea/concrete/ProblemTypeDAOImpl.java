@@ -17,16 +17,15 @@ public class ProblemTypeDAOImpl extends SqlServerConnector implements ProblemTyp
 	private ProblemTypeDAOImpl() {}
 	//pl_id,tch_id,plt_id,max_person;
 	//pl_name,pl_degree,pl_need,pl_eva_mode;
-	private static final String insertSql="insert into ProblemType values(?,?)";
+	private static final String insertSql="insert into ProblemType(pl_type) values(?)";
 	private static final String deleteSql="delete from ProblemType where plt_id = ?";
-	private static final String updateSql="update ProblemType set plt_id=?,pl_type=?";
-	private static final String selectSql="select * from ProblemType where 'plt_id'=?";
+	private static final String updateSql="update ProblemType set pl_type=? where plt_id=?";
+	private static final String selectSql="select * from ProblemType where plt_id=?";
 	
 	@Override
 	public void insert(ProblemType problemType) throws Exception{
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, problemType.getPlt_id());
-		statement.setString(2, problemType.getPl_type());
+		statement.setString(1, problemType.getPl_type());
 		statement.execute();
 	}
 	@Override
@@ -38,8 +37,8 @@ public class ProblemTypeDAOImpl extends SqlServerConnector implements ProblemTyp
 	@Override
 	public void update(ProblemType problemType) throws Exception{
 		PreparedStatement statement=connect().prepareStatement(updateSql);
-		statement.setInt(1, problemType.getPlt_id());
-		statement.setString(2, problemType.getPl_type());
+		statement.setString(1, problemType.getPl_type());
+		statement.setInt(2, problemType.getPlt_id());
 		statement.execute();
 	}
 	@Override
@@ -68,4 +67,10 @@ public class ProblemTypeDAOImpl extends SqlServerConnector implements ProblemTyp
 		}
 		return PTs;
 	}
+//	public static void main(String args[]) throws Exception {
+//		ProblemType pt = new ProblemType(3,"Êý×ÖÃ½Ìå");
+//		ProblemTypeDAOImpl dao=new ProblemTypeDAOImpl();
+//		dao.insert(pt);
+//		System.out.print(dao.select(3).getPl_type());
+//	}
 }

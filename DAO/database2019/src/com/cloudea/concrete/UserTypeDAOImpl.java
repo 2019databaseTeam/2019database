@@ -18,29 +18,29 @@ public class UserTypeDAOImpl extends SqlServerConnector implements UserTypeDAO {
 	private static final String insertSql="insert into UserType values(?,?)";
 	private static final String deleteSql="delete from UserType where u_id = ?";
 	private static final String updateSql="update UserType set u_id=?,name=?";
-	private static final String selectSql="select * from UserType where 'u_id'=?";
+	private static final String selectSql="select * from UserType where u_id=?";
 	
 	
 	@Override
-	public void insert(UserType UserType) throws Exception {
+	public void insert(UserType userType) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, UserType.getU_id());
-		statement.setString(2, UserType.getName());
+		statement.setInt(1, userType.getU_id());
+		statement.setString(2, userType.getName());
 		statement.execute();
 	}
 
 	@Override
-	public void delete(UserType UserType) throws Exception {
+	public void delete(UserType userType) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(deleteSql);
-		statement.setInt(1,UserType.getU_id());
+		statement.setInt(1,userType.getU_id());
 		statement.execute();
 	}
 
 	@Override
-	public void update(UserType UserType) throws Exception {
+	public void update(UserType userType) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, UserType.getU_id());
-		statement.setString(2, UserType.getName());
+		statement.setInt(1, userType.getU_id());
+		statement.setString(2, userType.getName());
 		statement.execute();
 	}
 
@@ -50,10 +50,10 @@ public class UserTypeDAOImpl extends SqlServerConnector implements UserTypeDAO {
 		statement.setInt(1,id);
 		ResultSet result=statement.executeQuery();
 		if(result.next()) {
-			UserType UserType=new UserType();
-			statement.setInt(1, UserType.getU_id());
-			statement.setString(2, UserType.getName());
-			return UserType;
+			UserType userType=new UserType();
+			userType.setU_id(result.getInt(1));
+			userType.setName(result.getString(2));
+			return userType;
 		}
 		return null;
 	}
@@ -85,41 +85,7 @@ public class UserTypeDAOImpl extends SqlServerConnector implements UserTypeDAO {
 		}
 		return Perms;
 	}
-	//public static void main(String args[]) throws Exception {
-		//MajorDAOImpl t=new MajorDAOImpl();
-		//t.selectAll("where mjr_id=1");
-	//}
-
-//	@Override
-//	public void insert(UserType UserType) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void delete(UserType UserType) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void update(UserType UserType) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public UserType select(int id) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public UserType select(String key, String value) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	public void main(String args[])
+	public static void main(String args[])
 	{
 		UserType ll=new UserType();
 		UserTypeDAOImpl l=new UserTypeDAOImpl();

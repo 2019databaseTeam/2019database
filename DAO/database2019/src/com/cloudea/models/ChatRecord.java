@@ -5,15 +5,15 @@ public class ChatRecord {
 	private int u_id_send;
 	private int u_id_receive;
 	private String time;
-	private String text;
+	private String content;
 	public ChatRecord() {}
-	public ChatRecord(int mes_id,int u_id_send,int u_id_receive,String time,String text)
+	public ChatRecord(int mes_id,int u_id_send,int u_id_receive,String time,String content)
 	{
 		this.mes_id=mes_id;
 		this.u_id_send=u_id_send;
 		this.u_id_receive=u_id_receive;
 		this.time=time;
-		this.text=text;
+		this.content=content;
 	}
 	public int getMes_id() {
 		return mes_id;
@@ -39,11 +39,12 @@ public class ChatRecord {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public String getText() {
-		return text;
+	public String getContent() {
+		return content;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setContent(String content) {
+		this.content = content;
 	}
+	
 	
 }

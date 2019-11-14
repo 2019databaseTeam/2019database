@@ -16,7 +16,7 @@ public class ReportTypeDAOImpl extends SqlServerConnector implements ReportTypeD
 	private ReportTypeDAOImpl() {}
 	private static final String insertSql="insert into ReportType values(?,?)";
 	private static final String deleteSql="delete from ReportType where rept_id=?";
-	private static final String updateSql="update ReportType set rept_id=?,report_type=?";
+	private static final String updateSql="update ReportType set report_type=? where rept_id = ?";
 	private static final String selectSql="select * from ReportType where rept_id=?";
 	
 	@Override
@@ -37,8 +37,8 @@ public class ReportTypeDAOImpl extends SqlServerConnector implements ReportTypeD
 	@Override
 	public void update(ReportType reporttype)throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, reporttype.getRept_id());
-		statement.setString(2, reporttype.getReport_type());
+		statement.setString(1, reporttype.getReport_type());
+		statement.setInt(2, reporttype.getRept_id());
 		statement.execute();
 	}
 	
@@ -68,4 +68,27 @@ public class ReportTypeDAOImpl extends SqlServerConnector implements ReportTypeD
 		}
 		return reports;
 	}
+	
+	
+	
+	
+	//测试
+//	public static void main(String[] args) throws Exception {
+//		ReportType reporttype=new ReportType(6,"月报2");
+//		ReportType reporttype1=new ReportType(3,"月报3");
+//		ReportType reporttype2=new ReportType();
+//		ReportTypeDAOImpl.getInstance().insert(reporttype);
+//		ReportTypeDAOImpl.getInstance().delete(reporttype);
+//		ReportTypeDAOImpl.getInstance().update(reporttype1);
+//		reporttype2=ReportTypeDAOImpl.getInstance().select(2);
+//		System.out.println(reporttype2.getRept_id()+"  "+reporttype2.getReport_type());
+
+//		List<ReportType> reporttypes;
+//		reporttypes=ReportTypeDAOImpl.getInstance().selectAll();
+//		for(ReportType reporttype2:reporttypes) {
+//			System.out.println(reporttype2.getRept_id()+"  "+reporttype2.getReport_type());
+//		}
+//
+//		}	
+//	
 }

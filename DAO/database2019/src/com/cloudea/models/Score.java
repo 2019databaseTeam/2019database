@@ -5,13 +5,13 @@ public class Score {
 
 	private int rep_id;
 	private int tch_id;
-	private int score;
 	private String comments;
+	private int score;
 	public Score() {
 		super();
 	}
 
-	public Score(int tch_id, int rep_id, int score, String comments) {
+	public Score(int rep_id, int tch_id, String comments,int score) {
 		super();
 		this.tch_id = tch_id;
 		this.rep_id = rep_id;

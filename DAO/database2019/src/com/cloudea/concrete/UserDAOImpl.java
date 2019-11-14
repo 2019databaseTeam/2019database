@@ -15,38 +15,38 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 	public static UserDAOImpl getInstance() {return UserDAOImpl.instance;};
 	
 	private UserDAOImpl() {}
-	private static final String insertSql="insert into User values(?,?,?,?,?)";
-	private static final String deleteSql="delete from User where u_id = ?";
-	private static final String updateSql="update User set u_id=?,u_type=?,u_mailbox=?,adm=?,pawd=?";
-	private static final String selectSql="select * from User where 'u_id'=?";
+	private static final String insertSql="insert into Admission values(?,?,?,?)";
+	private static final String deleteSql="delete from Admission where u_id = ?";
+	private static final String updateSql="update Admission set u_type=?,u_mailbox=?,adm=?,pawd=? where u_id=?";
+	private static final String selectSql="select * from Admission where u_id=?";
 	
 	
 	@Override
-	public void insert(User User) throws Exception {
+	public void insert(User user) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, User.getU_id());
-		statement.setString(2,User.getU_type());
-		statement.setString(3,User.getU_mailbox());
-		statement.setString(4,User.getAdm());
-		statement.setString(5,User.getPawd());
+
+		statement.setInt(1,user.getU_type());
+		statement.setString(2,user.getU_mailbox());
+		statement.setString(3,user.getAdm());
+		statement.setString(4,user.getPawd());
 		statement.execute();
 	}
 
 	@Override
-	public void delete(User User) throws Exception {
+	public void delete(User user) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(deleteSql);
-		statement.setInt(1,User.getU_id());
+		statement.setInt(1,user.getU_id());
 		statement.execute();
 	}
 
 	@Override
-	public void update(User User) throws Exception {
+	public void update(User user) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1,User.getU_id() );
-		statement.setString(2, User.getU_type());
-		statement.setString(3,User.getU_mailbox());
-		statement.setString(4,User.getAdm());
-		statement.setString(5,User.getPawd());
+		statement.setInt(1, user.getU_type());
+		statement.setString(2,user.getU_mailbox());
+		statement.setString(3,user.getAdm());
+		statement.setString(4,user.getPawd());
+		statement.setInt(5, user.getU_id());
 		statement.execute();
 	}
 
@@ -58,7 +58,7 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 		if(result.next()) {
 			User User=new User();
 			User.setU_id(result.getInt("u_id"));
-			User.setU_type(result.getString("u_type") );
+			User.setU_type(result.getInt("u_type") );
 			User.setU_mailbox(result.getString("u_mailbox"));
 			User.setAdm(result.getString("adm"));
 			User.setPawd(result.getString("pawd"));
@@ -69,7 +69,7 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 
 	@Override
 	public User select(String key, String value) throws Exception {
-		String sql="select * from User where "+key+"='"+value+"'";
+		String sql="select * from Admission where "+key+"='"+value+"'";
 		PreparedStatement statement = connect().prepareStatement(sql);
 
 		ResultSet result=statement.executeQuery();
@@ -77,7 +77,7 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 		{
 			User User=new User();
 			User.setU_id(result.getInt("u_id"));
-			User.setU_type(result.getString("u_type") );
+			User.setU_type(result.getInt("u_type") );
 			User.setU_mailbox(result.getString("u_mailbox"));
 			User.setAdm(result.getString("adm"));
 			User.setPawd(result.getString("pawd"));
@@ -88,13 +88,13 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 
 	@Override
 	public List<User> selectAll() throws Exception {
-		String sql="select * from User";
+		String sql="select * from Admission";
 		PreparedStatement statement = connect().prepareStatement(sql);
 		List<User>Users=new ArrayList<User>();
 		ResultSet result=statement.executeQuery();
 		while(result.next())
 		{
-			User t = new User(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),result.getString(5));
+			User t = new User(result.getInt(1),result.getInt(2),result.getString(3),result.getString(4),result.getString(5));
 			Users.add(t);
 		}
 		return Users;
@@ -102,62 +102,29 @@ public class UserDAOImpl extends SqlServerConnector implements UserDAO {
 
 	@Override
 	public List<User> selectAll(String condition) throws Exception {
-		String sql="select * from User "+condition;
+		String sql="select * from Admission "+condition;
 		PreparedStatement statement = connect().prepareStatement(sql);
 		List<User>Users=new ArrayList<User>();
 		ResultSet result=statement.executeQuery();
 		while(result.next())
 		{
-			User t = new User(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),result.getString(5));
+			User t = new User(result.getInt(1),result.getInt(2),result.getString(3),result.getString(4),result.getString(5));
 			Users.add(t);
 		}
 		return Users;
 	}
-	//public static void main(String args[]) throws Exception {
-		//MajorDAOImpl t=new MajorDAOImpl();
-		//t.selectAll("where mjr_id=1");
-	//}
 
-//	@Override
-//	public void insert(User User) throws Exception {
-//		// TODO Auto-generated method stub
-//		
+//	public static void main(String args[])
+//	{
+//	User user=new User(2,1,"te","te","t");
+//	UserDAOImpl l=new UserDAOImpl();
+//	try {
+//		l.update(user);
+//	} catch (Exception e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
 //	}
-//
-//	@Override
-//	public void delete(User User) throws Exception {
-//		// TODO Auto-generated method stub
-//		
 //	}
-//
-//	@Override
-//	public void update(User User) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public User select(int id) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public User select(String key, String value) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	public void main(String args[])
-	{
-		User ll=new User();
-		UserDAOImpl l=new UserDAOImpl();
-		try {
-			l.insert(ll);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
 
 

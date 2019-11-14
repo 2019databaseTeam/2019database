@@ -16,18 +16,17 @@ public class ReportDAOImpl extends SqlServerConnector implements ReportDAO{
 	private ReportDAOImpl() {}
 	private static final String insertSql="insert into Report values(?,?,?,?,?)";
 	private static final String deleteSql="delete from Report where rep_id = ?";
-	private static final String updateSql="update Report set rep_id=?,stu_id=?,pl_id=?,rept_id=?,time=?,content_report=?";
+	private static final String updateSql="update Report set stu_id=?,pl_id=?,rept_id=?,time=?,content_report=? where rep_id=?";
 	private static final String selectSql="select * from Report where rep_id=?";
 	
 	@Override
 	public void insert(Report report) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, report.getRep_id());
-		statement.setInt(2, report.getStu_id());
-		statement.setInt(3, report.getPl_id());
-		statement.setInt(4, report.getRept_id());
-		statement.setString(5, report.getTime());
-		statement.setString(6, report.getContent_report());
+		statement.setInt(1, report.getStu_id());
+		statement.setInt(2, report.getPl_id());
+		statement.setInt(3, report.getRept_id());
+		statement.setString(4, report.getTime());
+		statement.setString(5, report.getContent_report());
 		statement.execute();
 	}
 	
@@ -41,12 +40,13 @@ public class ReportDAOImpl extends SqlServerConnector implements ReportDAO{
 	@Override
 	public void update(Report report)throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, report.getRep_id());
-		statement.setInt(2, report.getStu_id());
-		statement.setInt(3, report.getPl_id());
-		statement.setInt(4, report.getRept_id());
-		statement.setString(5, report.getTime());
-		statement.setString(6, report.getContent_report());
+		
+		statement.setInt(1, report.getStu_id());
+		statement.setInt(2, report.getPl_id());
+		statement.setInt(3, report.getRept_id());
+		statement.setString(4, report.getTime());
+		statement.setString(5, report.getContent_report());
+		statement.setInt(6, report.getRep_id());
 		statement.execute();
 	}
 	
@@ -117,4 +117,32 @@ public class ReportDAOImpl extends SqlServerConnector implements ReportDAO{
 		}
 		return reports;
 	}
+	
+	
+	
+	//≤‚ ‘
+//	public static void main(String[] args) throws Exception {
+//		Report report=new Report(11,2,2,3,"2019-9-10","good");
+//		Report report1=new Report(8,1,2,"2019-9-11","not good");
+//		Report report2=new Report();
+//		ReportDAOImpl.getInstance().insert(report);
+//		ReportDAOImpl.getInstance().delete(report);
+//		ReportDAOImpl.getInstance().update(report);
+//		report2=ReportDAOImpl.getInstance().select(12);
+//		System.out.println(report2.getRep_id()+"  "+report2.getStu_id()+" "+report2.getPl_id()+" "+report2.getRept_id()+ " " + report2.getTime()+" "+report2.getContent_report());
+//		report2=ReportDAOImpl.getInstance().select("stu_id","2");
+//		report2=ReportDAOImpl.getInstance().select("u_id_receive","1");
+//		System.out.println(report2.getRep_id()+"  "+report2.getStu_id()+" "+report2.getPl_id()+" "+report2.getRept_id()+ " " + report2.getTime()+" "+report2.getContent_report());
+//		List<Report> reports;
+//		reports=ReportDAOImpl.getInstance().selectAll();
+//		for(Report report2:reports) {
+//			System.out.println(report2.getRep_id()+"  "+report2.getStu_id()+" "+report2.getPl_id()+" "+report2.getRept_id()+ " " + report2.getTime()+" "+report2.getContent_report());
+//		}
+//		reports=ReportDAOImpl.getInstance().selectAll("where Stu_id = 2 ");
+//		for(Report report2:reports) {
+//			System.out.println(report2.getRep_id()+"  "+report2.getStu_id()+" "+report2.getPl_id()+" "+report2.getRept_id()+ " " + report2.getTime()+" "+report2.getContent_report());
+//		}
+//		
+//		}
+	
 }

@@ -15,18 +15,17 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 	public static LogInDAOImpl getInstance() {return LogInDAOImpl.instance;};
 	
 	private LogInDAOImpl() {}
-	private static final String insertSql="insert into Log_in values(?,?,?)";
+	private static final String insertSql="insert into Log_in values(?,?)";
 	private static final String deleteSql="delete from Log_in where log_id = ?";
-	private static final String updateSql="update Log_in set log_id=?,u_id=?,in_time=?";
-	private static final String selectSql="select * from Log_in where 'log_id'=?";
+	private static final String updateSql="update Log_in set u_id=?,in_time=? where log_id=? ";
+	private static final String selectSql="select * from Log_in where log_id=?";
 	
 	
 	@Override
 	public void insert(LogIn login) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, login.getLog_id());
-		statement.setInt(2, login.getU_id());
-		statement.setString(3,login.getIn_time());
+		statement.setInt(1, login.getU_id());
+		statement.setString(2,login.getIn_time());
 		statement.execute();
 	}
 
@@ -40,9 +39,10 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 	@Override
 	public void update(LogIn login) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1,login.getLog_id() );
-		statement.setInt(2, login.getU_id());
-		statement.setString(3,login.getIn_time() );
+		
+		statement.setInt(1, login.getU_id());
+		statement.setString(2,login.getIn_time() );
+		statement.setInt(3,login.getLog_id() );
 		statement.execute();
 	}
 
@@ -105,51 +105,18 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 		}
 		return logins;
 	}
-	//public static void main(String args[]) throws Exception {
-		//MajorDAOImpl t=new MajorDAOImpl();
-		//t.selectAll("where mjr_id=1");
-	//}
 
-//	@Override
-//	public void insert(LogIn logIn) throws Exception {
-//		// TODO Auto-generated method stub
-//		
+//	public static void main(String args[])
+//	{
+//		LogIn ll=new LogIn(1,);
+//		LogInDAOImpl l=new LogInDAOImpl();
+//		try {
+//			l.insert(ll);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //	}
-//
-//	@Override
-//	public void delete(LogIn logIn) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void update(LogIn logIn) throws Exception {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public LogIn select(int id) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public LogIn select(String key, String value) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	public void main(String args[])
-	{
-		LogIn ll=new LogIn();
-		LogInDAOImpl l=new LogInDAOImpl();
-		try {
-			l.insert(ll);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
 
 
