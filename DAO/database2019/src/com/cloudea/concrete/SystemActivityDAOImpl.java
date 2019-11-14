@@ -16,7 +16,7 @@ public class SystemActivityDAOImpl extends SqlServerConnector implements SystemA
     public static SystemActivityDAOImpl getInstance() {return SystemActivityDAOImpl.instance;};
     private SystemActivityDAOImpl() {}
 		
-		private static final String insertSql = "insert into SystemActivity (sa_id,sa_name,sa_start_time,sa_lap1_end_time,sa_lap2_end_time) values(?,?,?,?,?)";
+		private static final String insertSql = "insert into SystemActivity (sa_name,sa_start_time,sa_lap1_end_time,sa_lap2_end_time) values(?,?,?,?)";
 
 		 private static final String deleteSql = "delete from SystemActivity where sa_id = ?";
 
@@ -25,11 +25,11 @@ public class SystemActivityDAOImpl extends SqlServerConnector implements SystemA
 		 private static final String selectSql = "select * from SystemActivity where sa_id = ?";
 	public void insert(SystemActivity systemActivity) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, systemActivity.getSa_id());
-		statement.setString(2,systemActivity.getSa_name());
-		statement.setString(3, systemActivity.getSa_start_time());
-		statement.setString(4, systemActivity.getSa_lap1_end_time());
-		statement.setString(5, systemActivity.getSa_lap2_end_time());
+
+		statement.setString(1,systemActivity.getSa_name());
+		statement.setString(2, systemActivity.getSa_start_time());
+		statement.setString(3, systemActivity.getSa_lap1_end_time());
+		statement.setString(4, systemActivity.getSa_lap2_end_time());
 		statement.execute();
 		
 	}
@@ -77,8 +77,27 @@ public class SystemActivityDAOImpl extends SqlServerConnector implements SystemA
 	@Override
 	public SystemActivity select(String key, String value) throws Exception {
 		// TODO Auto-generated method stub
-		String sql1 = "select * from Selection where "+key+"= '"+value+"'";
+		String sql1 = "select * from SystemActivity where "+key+"= '"+value+"'";
 		PreparedStatement statement=connect().prepareStatement(sql1);
+		ResultSet results=statement.executeQuery();
+		if(results.next())
+		{
+			SystemActivity systemActivity=new SystemActivity();
+			systemActivity.setSa_id(results.getInt(1));
+			systemActivity.setSa_name(results.getString(2));
+			systemActivity.setSa_start_time(results.getString(3));
+			systemActivity.setSa_lap1_end_time(results.getString(4));
+			systemActivity.setSa_lap2_end_time(results.getString(5));
+			return systemActivity;	
+		}
+		return null;
+	}
+	@Override
+	public SystemActivity select(String key, int value) throws Exception {
+		// TODO Auto-generated method stub
+		String sql1 = "select * from SystemActivity where "+key+"="+String.valueOf(value);
+		PreparedStatement statement=connect().prepareStatement(sql1);
+
 		ResultSet results=statement.executeQuery();
 		if(results.next())
 		{
