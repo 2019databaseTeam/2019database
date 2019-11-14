@@ -1,6 +1,5 @@
 package com.cloudea.concrete;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,20 +8,19 @@ import java.util.List;
 import com.cloudea.connector.SqlServerConnector;
 import com.cloudea.daoes.SelectedTopicDAO;
 import com.cloudea.models.SelectedTopic;
-import com.cloudea.models.Student;
-import com.cloudea.models.SelectedTopic;
 
-public class SelectedTopicDAOForSqlServer extends SqlServerConnector implements SelectedTopicDAO {
+
+public class SelectedTopicDAOImpl extends SqlServerConnector implements SelectedTopicDAO {
    
-	private static SelectedTopicDAOForSqlServer instance = new SelectedTopicDAOForSqlServer();
-    public static SelectedTopicDAOForSqlServer getInstance() {return SelectedTopicDAOForSqlServer.instance;};
-    private SelectedTopicDAOForSqlServer() {}
+	private static SelectedTopicDAOImpl instance = new SelectedTopicDAOImpl();
+    public static SelectedTopicDAOImpl getInstance() {return SelectedTopicDAOImpl.instance;};
+    private SelectedTopicDAOImpl() {}
 		
-		private static final String insertSql = "insert into SelectedTopic values(?, ?)";
+		private static final String insertSql = "insert into SelectedTopic values(?, ?,?)";
 
 		 private static final String deleteSql = "delete from SelectedTopic where stu_id = ?";
 
-		 private static final String updateSql = "update SelectedTopic set stu_id = ?, pl_id = ?";
+		 private static final String updateSql = "update SelectedTopic set stu_id = ?, pl_id = ?,select_time=?";
 
 		 private static final String selectSql = "select * from SelectedTopic where stu_id = ?";
 		 
@@ -30,6 +28,7 @@ public class SelectedTopicDAOForSqlServer extends SqlServerConnector implements 
 				PreparedStatement statement=connect().prepareStatement(insertSql);
 				statement.setInt(1, selectedTopic.getStu_id());
 				statement.setInt(2, selectedTopic.getPl_id());
+				statement.setString(3, selectedTopic.getSelect_time());
 				statement.execute();
 				
 			}
@@ -45,6 +44,7 @@ public class SelectedTopicDAOForSqlServer extends SqlServerConnector implements 
 				PreparedStatement statement=connect().prepareStatement(updateSql);
 				statement.setInt(1, selectedTopic.getStu_id());
 				statement.setInt(2, selectedTopic.getPl_id());
+				statement.setString(3, selectedTopic.getSelect_time());
 				statement.execute();
 			}
 		 
@@ -105,23 +105,20 @@ public class SelectedTopicDAOForSqlServer extends SqlServerConnector implements 
 				ResultSet results=statement.executeQuery();
 				while(results.next())
 				{
-					SelectedTopic t=new SelectedTopic(results.getInt(1),results.getInt(2));
+					SelectedTopic t=new SelectedTopic(results.getInt(1),results.getInt(2),results.getString(3));
 					selectedTopics.add(t);
 				}
 				return selectedTopics;
 		}
 
-	 public static void main(String[] args) {
-		 SelectedTopicDAOForSqlServer a=new SelectedTopicDAOForSqlServer();
-		/* try {
-			a.insert(new SelectedTopic(1,2));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-	  
-     
-	}
+//	 public static void main(String[] args) {
+//		 SelectedTopicDAOImpl a=new SelectedTopicDAOImpl();
+//		 try {
+//			a.insert(new SelectedTopic(1,2,"2019-1-1"));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 }

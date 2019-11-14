@@ -10,19 +10,19 @@ import com.cloudea.connector.SqlServerConnector;
 import com.cloudea.daoes.SelectionDAO;
 import com.cloudea.models.Selection;
 
-public class SelectionDAOForSqlServer extends SqlServerConnector implements SelectionDAO {
+public class SelectionDAOImpl extends SqlServerConnector implements SelectionDAO {
 	
-	private static SelectionDAOForSqlServer instance = new SelectionDAOForSqlServer();
-    public static SelectionDAOForSqlServer getInstance() {return SelectionDAOForSqlServer.instance;};
-    private SelectionDAOForSqlServer() {}
+	private static SelectionDAOImpl instance = new SelectionDAOImpl();
+    public static SelectionDAOImpl getInstance() {return SelectionDAOImpl.instance;};
+    private SelectionDAOImpl() {}
 		
-		private static final String insertSql = "insert into Materila values(?, ?,?,?)";
+		private static final String insertSql = "insert into Selection values(?, ?,?,?)";
 
-		 private static final String deleteSql = "delete from Material where sec_id = ?";
+		 private static final String deleteSql = "delete from Selection where sec_id = ?";
 
-		 private static final String updateSql = "update Materila set stu_id = ?, priority = ?,pl_id=?,m_id=? where sec_id = ?";
+		 private static final String updateSql = "update Selection set stu_id = ?, priority = ?,pl_id=?,m_id=? where sec_id = ?";
 
-		 private static final String selectSql = "select * from Material where sec_id = ?";
+		 private static final String selectSql = "select * from Selection where sec_id = ?";
 
 	
 	public void insert(Selection selection) throws Exception {

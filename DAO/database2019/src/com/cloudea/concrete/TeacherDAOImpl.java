@@ -9,13 +9,13 @@ import com.cloudea.connector.SqlServerConnector;
 import com.cloudea.daoes.TeacherDAO;
 import com.cloudea.models.Teacher;
 
-public class TeacherDAPImpl extends SqlServerConnector implements TeacherDAO{
+public class TeacherDAOImpl extends SqlServerConnector implements TeacherDAO{
 	
-	private static TeacherDAPImpl instance= new TeacherDAPImpl();
-	public static TeacherDAPImpl getInstance() { 
-		return TeacherDAPImpl.instance;
+	private static TeacherDAOImpl instance= new TeacherDAOImpl();
+	public static TeacherDAOImpl getInstance() { 
+		return TeacherDAOImpl.instance;
 	}
-	private TeacherDAPImpl() {}
+	private TeacherDAOImpl() {}
 	//pl_id,tch_id,plt_id,max_person;
 	//pl_name,pl_degree,pl_need,pl_eva_mode;
 	private static final String insertSql="insert into Teacher values(?,?,?)";

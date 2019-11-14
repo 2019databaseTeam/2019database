@@ -11,19 +11,19 @@ import com.cloudea.daoes.StudentDAO;
 import com.cloudea.models.Selection;
 import com.cloudea.models.Student;
 
-public class StudentDAOForSqlServer extends SqlServerConnector implements StudentDAO {
+public class StudentDAOImpl extends SqlServerConnector implements StudentDAO {
 
-	private static StudentDAOForSqlServer instance = new StudentDAOForSqlServer();
-    public static StudentDAOForSqlServer getInstance() {return StudentDAOForSqlServer.instance;};
-    private StudentDAOForSqlServer() {}
+	private static StudentDAOImpl instance = new StudentDAOImpl();
+    public static StudentDAOImpl getInstance() {return StudentDAOImpl.instance;};
+    private StudentDAOImpl() {}
 		
 		private static final String insertSql = "insert into Student (u_id,SN,mjr_id) values(?, ?,?)";
 
 		 private static final String deleteSql = "delete from Student where stu_id = ?";
 
-		 private static final String updateSql = "update Materila set u_id = ?, SN = ?,mjr_id=? where stu_id=?";
+		 private static final String updateSql = "update Student set u_id = ?, SN = ?,mjr_id=? where stu_id=?";
 
-		 private static final String selectSql = "select * from Material where stu_id = ?";
+		 private static final String selectSql = "select * from Student where stu_id = ?";
 	public void insert(Student student) throws Exception {
 		PreparedStatement statement=connect().prepareStatement(insertSql);
 		statement.setInt(1, student.getU_id());

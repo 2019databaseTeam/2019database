@@ -4,11 +4,19 @@ public class Material {
    private int m_id;
    private int stu_id;
    private String m_text;
-   public Material(int a,int b,String c)
+   private String m_proof;
+   public String getM_proof() {
+	return m_proof;
+}
+public void setM_proof(String m_proof) {
+	this.m_proof = m_proof;
+}
+public Material(int a,int b,String c,String d)
    {
 	   m_id=a;
 	   stu_id=b;
 	   m_text=c;
+	   m_proof=d;
    }
    public Material(){}
 public int getM_id() {
