@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class SqlServerConnector implements Connector {
 	
-	private String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=2019database;user=sa;password=111111";
+	private String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=2019database;user=lx;password=110898";
 	public SqlServerConnector() {}
 	
 	@Override

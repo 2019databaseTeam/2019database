@@ -10,7 +10,6 @@ public interface SystemActivityDAO extends DAO {
 	void update(SystemActivity systemActivity) throws Exception;
 	SystemActivity select(int id) throws Exception;
 	SystemActivity select(String key, String value) throws Exception;
-	SystemActivity select(String key, int value) throws Exception;
 	List<SystemActivity> selectAll() throws Exception;
 	List<SystemActivity> selectAll(String condition) throws Exception;
 }

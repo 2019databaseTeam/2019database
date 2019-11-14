@@ -27,6 +27,7 @@ public class ChatRecordDAOImpl extends SqlServerConnector implements ChatRecordD
 		statement.setInt(2, chatrecord.getU_id_receive());
 		statement.setString(3, chatrecord.getTime());
 		statement.setString(4, chatrecord.getContent());
+		
 		statement.execute();
 	}
 	

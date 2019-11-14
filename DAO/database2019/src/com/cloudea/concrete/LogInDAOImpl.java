@@ -15,7 +15,7 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 	public static LogInDAOImpl getInstance() {return LogInDAOImpl.instance;};
 	
 	private LogInDAOImpl() {}
-	private static final String insertSql="insert into Log_in values(?,?)";
+	private static final String insertSql="insert into Log_in(u_id,in_time) values(?,?)";
 	private static final String deleteSql="delete from Log_in where log_id = ?";
 	private static final String updateSql="update Log_in set u_id=?,in_time=? where log_id=? ";
 	private static final String selectSql="select * from Log_in where log_id=?";
@@ -106,17 +106,17 @@ public class LogInDAOImpl extends SqlServerConnector implements LogInDAO {
 		return logins;
 	}
 
-//	public static void main(String args[])
-//	{
-//		LogIn ll=new LogIn(1,);
-//		LogInDAOImpl l=new LogInDAOImpl();
-//		try {
-//			l.insert(ll);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	public static void main(String args[])
+	{
+		LogIn ll=new LogIn(1,1,"1999-11-29");
+		LogInDAOImpl l=new LogInDAOImpl();
+		try {
+			l.insert(ll);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 
 
