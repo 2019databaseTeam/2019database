@@ -1,0 +1,9 @@
+/*教师对学生的报告进行评分*/
+
+insert into Score(rep_id, tch_id, comments, score)
+values(
+	1, /*李华提交的报告id*/
+	1, /*赵方老师的教师id*/
+	'做得不错哟',
+	100
+)

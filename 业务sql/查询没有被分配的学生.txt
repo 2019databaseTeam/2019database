@@ -1,0 +1,6 @@
+/*查询没有被分配的学生*/
+
+select * from Student
+where Student.stu_id not in (
+	select Selectedtopic.stu_id from Selectedtopic
+)

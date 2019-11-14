@@ -1,0 +1,10 @@
+/*李华同学添加材料*/
+
+insert into Material(stu_id, m_text, m_proof)
+values(1, '大家好，我叫李华', '/uploads/a.pdf');
+
+insert into Material(stu_id, m_text, m_proof)
+values(1, '大家好，我叫李华, 我擅长于XXX项目', '/uploads/b.pdf');
+
+insert into Material(stu_id, m_text, m_proof)
+values(1, '大家好，我叫李华, 我擅长于XXX项目， 以及不害怕艰难', '/uploads/c.pdf');

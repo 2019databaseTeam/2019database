@@ -1,0 +1,13 @@
+/*教师确定学生选中*/
+
+/*确定李华选中*/
+insert into Selectedtopic(stu_id, pl_id, select_time)
+values(
+	1,   /*表示学号为1的学生：李华*/
+	2,    /*题号为2*/
+	GETDATE()
+)
+
+/*将李华的所有志愿删除*/
+
+delete from Selection where Selection.stu_id = 1

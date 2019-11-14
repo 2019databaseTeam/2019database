@@ -1,0 +1,10 @@
+
+/*超级管理员创建一个活动*/
+
+insert into SystemActivity (sa_name, sa_start_time, sa_lap1_end_time, sa_lap2_end_time)
+values(
+	'2017级毕业设计选题',
+	'2019-11-13 9:00:00',
+	'2019-11-14 9:00:00',
+	'2019-11-15 9:00:00'
+)

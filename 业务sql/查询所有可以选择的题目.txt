@@ -1,0 +1,8 @@
+
+/*选出所有可选择的题目*/
+
+select * from Problem 
+where Problem.max_person > (
+	select count(*) from Selectedtopic
+	where Selectedtopic.pl_id = Problem.pl_id
+)

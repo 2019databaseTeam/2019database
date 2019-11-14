@@ -1,0 +1,16 @@
+/*查询还有剩余容量的题目*/
+
+select Problem.pl_id, Problem.pl_name, Problem.max_person, temp.选择人数 from
+Problem inner join (
+		select Selectedtopic.pl_id, count(*) as 选择人数 from Selectedtopic group by pl_id
+	) as temp
+on
+Problem.pl_id = temp.pl_id
+
+union
+
+select  Problem.pl_id, Problem.pl_name, Problem.max_person, 0 as 选择人数 from Problem
+where not exists(
+	select * from Selectedtopic 
+	where Selectedtopic.pl_id = Problem.pl_id
+)
