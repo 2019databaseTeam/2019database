@@ -86,6 +86,7 @@ public class AdministratorDAOImpl extends SqlServerConnector implements Administ
 		}
 		return null;
 	}
+	
 	@Override
 	public List<Administrator> selectAll() throws Exception {
 		String sql="select * from Administrator";
@@ -102,7 +103,7 @@ public class AdministratorDAOImpl extends SqlServerConnector implements Administ
 
 	@Override
 	public List<Administrator> selectAll(String condition) throws Exception {
-		String sql="select * from Administrator"+condition;
+		String sql="select * from Administrator "+condition;
 		PreparedStatement statement = connect().prepareStatement(sql);
 		List<Administrator> administrators=new ArrayList<Administrator>();
 		ResultSet result=statement.executeQuery();
