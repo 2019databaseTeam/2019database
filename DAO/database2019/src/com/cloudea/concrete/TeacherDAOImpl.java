@@ -18,7 +18,7 @@ public class TeacherDAOImpl extends SqlServerConnector implements TeacherDAO{
 	private TeacherDAOImpl() {}
 	//pl_id,tch_id,plt_id,max_person;
 	//pl_name,pl_degree,pl_need,pl_eva_mode;
-	private static final String insertSql="insert into Teacher values(?,?,?)";
+	private static final String insertSql="insert into Teacher(tch_id,u_id,tch_name) values(?,?,?)";
 	private static final String deleteSql="delete from Teacher where tch_id = ?";
 	private static final String updateSql="update Teacher set u_id=?,tch_name=? where tch_id=?";
 	private static final String selectSql="select * from Teacher where tch_id=?";

@@ -19,7 +19,7 @@ public class ProblemProfessionDAOImpl extends SqlServerConnector implements Prob
 	
 	private static final String insertSql="insert into ProblemProfession values(?,?)";
 	private static final String deleteSql="delete from ProblemProfession where pl_id = ? and mjr_id=?";
-	private static final String updateSql="update ProblemProfession set pl_id = ?,mjr_id=?";
+	private static final String updateSql="update ProblemProfession set pl_id = ?,mjr_id=? where pl_id = ? and mjr_id=?";
 	private static final String selectSql="select * from ProblemProfession where pl_id=?";
 	public void insert(ProblemProfession PP) throws Exception{
 		PreparedStatement statement=connect().prepareStatement(insertSql);
@@ -33,10 +33,13 @@ public class ProblemProfessionDAOImpl extends SqlServerConnector implements Prob
 		statement.setInt(2, PP.getMjr_id());
 		statement.execute();
 	}
-	public void update(ProblemProfession PP) throws Exception{
+	public void update(ProblemProfession oldPP,ProblemProfession newPP) throws Exception{
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, PP.getPl_id());
-		statement.setInt(2, PP.getMjr_id());
+		statement.setInt(1, newPP.getPl_id());
+		statement.setInt(2, newPP.getMjr_id());
+		
+		statement.setInt(3, oldPP.getPl_id());
+		statement.setInt(4, oldPP.getMjr_id());
 		statement.execute();
 	}
 	

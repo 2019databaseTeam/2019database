@@ -19,21 +19,20 @@ public class ProblemDAOImpl extends SqlServerConnector implements ProblemDAO{
 	private ProblemDAOImpl() {}
 	//pl_id,tch_id,plt_id,max_person;
 	//pl_name,pl_degree,pl_need,pl_eva_mode;
-	private static final String insertSql="insert into Problem values(?,?,?,?,?,?,?,?)";
+	private static final String insertSql="insert into Problem(tch_id,plt_id,pl_name,pl_degree,pl_need,pl_eva_mode,max_person) values(?,?,?,?,?,?,?)";
 	private static final String deleteSql="delete from Problem where pl_id = ?";
 	private static final String updateSql="update Problem set tch_id=?,plt_id=?,pl_name=?,pl_degree=?,pl_need=?,pl_eva_mode=?,max_person=? where pl_id=?";
 	private static final String selectSql="select * from Problem where pl_id=?";
 	@Override
 	public void insert(Problem problem) throws Exception{
 		PreparedStatement statement=connect().prepareStatement(insertSql);
-		statement.setInt(1, problem.getPl_id());
-		statement.setInt(2,problem.getTch_id());
-		statement.setInt(3, problem.getPlt_id());
-		statement.setString(4,problem.getPl_name());
-		statement.setString(5, problem.getPl_degree());
-		statement.setString(6, problem.getPl_need());
-		statement.setString(7, problem.getPl_eva_mode());
-		statement.setInt(8, problem.getMax_person());
+		statement.setInt(1,problem.getTch_id());
+		statement.setInt(2, problem.getPlt_id());
+		statement.setString(3,problem.getPl_name());
+		statement.setString(4, problem.getPl_degree());
+		statement.setString(5, problem.getPl_need());
+		statement.setString(6, problem.getPl_eva_mode());
+		statement.setInt(7, problem.getMax_person());
 		statement.execute();
 	}
 	@Override

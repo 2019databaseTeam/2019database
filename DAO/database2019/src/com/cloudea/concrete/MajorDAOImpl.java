@@ -18,7 +18,7 @@ public class MajorDAOImpl extends SqlServerConnector implements MajorDAO {
 	private MajorDAOImpl() {}
 	private static final String insertSql="insert into Major(mjr_name) values(?)";
 	private static final String deleteSql="delete from Major where mjr_id = ?";
-	private static final String updateSql="update Major setmjr_name=?  where mjr_id=?";
+	private static final String updateSql="update Major set mjr_name=?  where mjr_id=?";
 	private static final String selectSql="select * from Major where mjr_id=?";
 	
 	
