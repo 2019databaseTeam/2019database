@@ -13,6 +13,7 @@ public class Student {
 	   SN=c;
 	   mjr_id=d;
    }
+   
 public int getStu_id() {
 	return stu_id;
 }

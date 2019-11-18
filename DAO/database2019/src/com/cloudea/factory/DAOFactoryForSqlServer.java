@@ -6,7 +6,12 @@ import com.cloudea.concrete.*;
 public class DAOFactoryForSqlServer extends DAOFactory {
 
 	@Override
+<<<<<<< HEAD
 	public DAO getDAO(String name) {
+=======
+	public
+	DAO getDAO(String name) {
+>>>>>>> aa13daa8db7ad5e0994bc50ad078e724ba20dfa5
 		if(name.equals("Administrator")) {
 			return AdministratorDAOImpl.getInstance();
 		}
@@ -64,7 +69,7 @@ public class DAOFactoryForSqlServer extends DAOFactory {
 		else if(name.equals("UserPerm")){
 			return UserPermDAOImpl.getInstance();
 		}
-		else if(name.equals("UserTypeDAO")){
+		else if(name.equals("UserType")){
 			return UserTypeDAOImpl.getInstance();
 		}
 		

@@ -9,5 +9,7 @@ public interface SelectedTopicDAO extends DAO {
 	void delete(SelectedTopic selectedTopic) throws Exception;
 	void update(SelectedTopic selectedTopic) throws Exception;
 	SelectedTopic select(int stu_id) throws Exception;
-	List<SelectedTopic> selectAll() throws Exception;
+    SelectedTopic select(String string, String string2)throws Exception;
+    List<SelectedTopic> selectAll() throws Exception;
+	List<SelectedTopic> selectAll(String string)throws Exception;
 }

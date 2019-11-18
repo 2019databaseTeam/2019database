@@ -16,9 +16,9 @@ public class UserTypeDAOImpl extends SqlServerConnector implements UserTypeDAO {
 	
 	private UserTypeDAOImpl() {}
 	private static final String insertSql="insert into UserType values(?,?)";
-	private static final String deleteSql="delete from UserType where u_id = ?";
-	private static final String updateSql="update UserType set u_id=?,name=?";
-	private static final String selectSql="select * from UserType where u_id=?";
+	private static final String deleteSql="delete from UserType where ut_id = ?";
+	private static final String updateSql="update UserType set name=? where ut_id=?";
+	private static final String selectSql="select * from UserType where ut_id=?";
 	
 	
 	@Override
@@ -39,8 +39,8 @@ public class UserTypeDAOImpl extends SqlServerConnector implements UserTypeDAO {
 	@Override
 	public void update(UserType userType) throws Exception {
 		PreparedStatement statement = connect().prepareStatement(updateSql);
-		statement.setInt(1, userType.getU_id());
-		statement.setString(2, userType.getName());
+		statement.setInt(2, userType.getU_id());
+		statement.setString(1, userType.getName());
 		statement.execute();
 	}
 
@@ -88,6 +88,8 @@ public class UserTypeDAOImpl extends SqlServerConnector implements UserTypeDAO {
 	public static void main(String args[])
 	{
 		UserType ll=new UserType();
+		ll.setName("lihua");
+		ll.setU_id(1);
 		UserTypeDAOImpl l=new UserTypeDAOImpl();
 		try {
 			l.insert(ll);
